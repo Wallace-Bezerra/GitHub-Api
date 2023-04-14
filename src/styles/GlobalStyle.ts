@@ -20,6 +20,7 @@ export const GlobalStyle = createGlobalStyle`
 }
 body{
     background-color: #010206;
+    color: white;
     min-height: 100vh;
     display: flex;
     justify-content: center;

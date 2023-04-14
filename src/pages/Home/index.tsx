@@ -1,10 +1,14 @@
 import github from "../../assets/github.png";
-import search from "../../assets/search.svg";
+import { MagnifyingGlass, FolderSimpleStar } from "phosphor-react/dist";
 import { HomeContainer } from "./styles";
+import { Link } from "react-router-dom";
 
 export const Home = () => {
   return (
     <HomeContainer>
+      <Link to={"/favorites"} className="favorites">
+        <FolderSimpleStar size={32} color="#ddd4d4" />
+      </Link>
       <div className="InputContainer">
         <h1>
           Digite um usuário do
@@ -12,9 +16,9 @@ export const Home = () => {
         </h1>
         <form>
           <input type="text" />
-          <button>
-            <img src={search} alt="search" />
-          </button>
+          <Link to="/user/">
+            <MagnifyingGlass size={24} weight="bold" />
+          </Link>
         </form>
       </div>
       <img src={github} alt="github" />

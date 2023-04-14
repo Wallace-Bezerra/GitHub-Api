@@ -7,21 +7,34 @@ export const HomeContainer = styled.div`
     rgba(35, 47, 69, 0.71) 85.31%
   );
   border-radius: 5px;
-  padding: 60px 90px;
+  width: 1000px;
+  height: 422.28px;
+  justify-content: center;
+  align-items: center;
   display: flex;
-  gap: 78px;
+  gap: 100px;
+  position: relative;
+  .favorites {
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    cursor: pointer;
+  }
+
   .InputContainer {
     display: flex;
     flex-direction: column;
-    gap: 26px;
+    gap: 44px;
     h1 {
       max-width: 401px;
       width: 100%;
       font-family: "Inter";
       color: #ffffff;
       font-weight: 500;
-      font-size: 42px;
-      line-height: 49px;
+      font-size: 41.4508px;
+      line-height: 50px;
       span {
         color: #8785df;
       }
@@ -31,8 +44,8 @@ export const HomeContainer = styled.div`
       align-self: flex-start;
       input {
         border: none;
-        width: 220.64px;
-        height: 28px;
+        width: 285.8px;
+        height: 36.27px;
         background: #5a6074;
         border-radius: 3px;
         font-weight: 400;
@@ -41,9 +54,8 @@ export const HomeContainer = styled.div`
         color: #ebebeb;
         padding: 8px 15px;
       }
-      button {
-        border: none;
-        img {
+      a {
+        svg {
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
@@ -52,5 +64,9 @@ export const HomeContainer = styled.div`
         }
       }
     }
+  }
+  img {
+    max-width: 217.62px;
+    width: 100%;
   }
 `;
