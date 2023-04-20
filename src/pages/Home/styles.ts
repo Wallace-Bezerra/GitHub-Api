@@ -1,19 +1,21 @@
 import styled from "styled-components";
 
 export const HomeContainer = styled.div`
+  position: relative;
   background: linear-gradient(
     106.63deg,
     #101724 18.44%,
     rgba(35, 47, 69, 0.71) 85.31%
   );
   border-radius: 5px;
-  width: 1000px;
+  max-width: 1000px;
+  width: 100%;
   height: 422.28px;
-  justify-content: center;
-  align-items: center;
-  display: flex;
+  /* width: 1000px; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* display: flex; */
   gap: 100px;
-  position: relative;
   .favorites {
     background-color: transparent;
     border: none;

@@ -4,8 +4,8 @@ export const DashboardContainer = styled.div`
   position: relative;
   display: flex;
   gap: 60px;
-  width: 1000px;
-  /* width: 100%; */
+  max-width: 1000px;
+  width: 100%;
   height: 493.76px;
   background: linear-gradient(
     105.66deg,
@@ -64,7 +64,7 @@ export const Links = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-  padding-top: 40px;
+  padding-top: 100px;
   padding-right: 40px;
   width: 100%;
 `;
