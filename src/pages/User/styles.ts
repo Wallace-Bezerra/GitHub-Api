@@ -26,9 +26,11 @@ export const CardUser = styled(CardContainer)`
     .heading {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 5px 12px;
+      flex-wrap: wrap;
     }
     p {
+      margin-top: 8px;
       font-weight: 400;
       font-size: 18.1612px;
       line-height: 22px;
@@ -38,14 +40,14 @@ export const CardUser = styled(CardContainer)`
   .Followers {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     gap: 14px;
     padding-top: 16px;
     p {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 28px;
-      height: 20px;
+      padding: 2px 4px;
       background: #c5e0f9;
       border-radius: 3.40522px;
       font-weight: 600;
@@ -57,11 +59,23 @@ export const CardUser = styled(CardContainer)`
 `;
 
 export const ProfileUser = styled(CardContainer)`
+  align-self: start;
   .heading {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-bottom: 16px;
+    .created {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      p {
+        color: #c5e0f9;
+      }
+    }
+  }
+  p {
+    line-height: 24px;
   }
 `;
 

@@ -21,9 +21,13 @@ export const GlobalStyle = createGlobalStyle`
 body{
     background-color: #010206;
     color: white;
+  }
+  .App{
     min-height: 100vh;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-inline: 20px;
   }
 `;

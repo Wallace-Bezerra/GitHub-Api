@@ -2,20 +2,21 @@ import styled from "styled-components";
 
 export const HomeContainer = styled.div`
   position: relative;
-  background: linear-gradient(
-    106.63deg,
-    #101724 18.44%,
-    rgba(35, 47, 69, 0.71) 85.31%
-  );
-  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  flex-wrap: wrap;
   max-width: 1000px;
   width: 100%;
-  height: 422.28px;
-  /* width: 1000px; */
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* display: flex; */
-  gap: 100px;
+  height: 493.76px;
+  padding: 120px;
+  background: linear-gradient(
+    105.66deg,
+    #101724 18.56%,
+    rgba(23, 32, 49, 0.67) 91.68%
+  );
+  border-radius: 5.67537px;
   .favorites {
     background-color: transparent;
     border: none;
@@ -24,7 +25,6 @@ export const HomeContainer = styled.div`
     right: 32px;
     cursor: pointer;
   }
-
   .InputContainer {
     display: flex;
     flex-direction: column;

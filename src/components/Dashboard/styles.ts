@@ -41,7 +41,7 @@ export const Navbar = styled.aside`
     width: 54.48px;
     height: 55.62px;
     border-radius: 50%;
-    border: 2.5px solid #d9d9d9;
+    /* border: 2.5px solid #d9d9d9; */
   }
 `;
 export const Links = styled.div`

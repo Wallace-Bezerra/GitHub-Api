@@ -1,11 +1,14 @@
 import { Router } from "./Routes";
+import { UserContextProvider } from "./context/UserContext";
 import { GlobalStyle } from "./styles/GlobalStyle";
 
 function App() {
   return (
     <div className="App">
-      <GlobalStyle />
-      <Router />
+      <UserContextProvider>
+        <GlobalStyle />
+        <Router />
+      </UserContextProvider>
     </div>
   );
 }
