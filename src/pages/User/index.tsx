@@ -10,6 +10,7 @@ import { UserContext } from "../../context/UserContext";
 
 export const User = () => {
   const { UserData } = useContext(UserContext);
+  console.log(UserData.public_repos);
   return (
     <GridUser>
       <CardUser>

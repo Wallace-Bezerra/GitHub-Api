@@ -1,9 +1,14 @@
 import github from "../../assets/github.png";
 import { MagnifyingGlass, FolderSimpleStar } from "phosphor-react/dist";
 import { HomeContainer } from "./styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useRef } from "react";
+import { UserContext } from "../../context/UserContext";
 
 export const Home = () => {
+  const navigate = useNavigate();
+  const { setUserData, UserData } = useContext(UserContext);
+  const UserRef = useRef<HTMLInputElement>(null);
   return (
     <HomeContainer>
       <Link to={"/favorites"} className="favorites">
@@ -14,11 +19,17 @@ export const Home = () => {
           Digite um usuário do
           <span> GitHub</span>
         </h1>
-        <form>
-          <input type="text" />
-          <Link to="/user/">
+        <form
+          onSubmit={() => {
+            navigate("/user/");
+            console.log(UserRef.current?.value);
+            setUserData({ ...UserData, login: UserRef.current?.value });
+          }}
+        >
+          <input type="text" ref={UserRef} required />
+          <button type="submit">
             <MagnifyingGlass size={24} weight="bold" />
-          </Link>
+          </button>
         </form>
       </div>
       <img src={github} alt="github" />

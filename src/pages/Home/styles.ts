@@ -56,17 +56,20 @@ export const HomeContainer = styled.div`
         color: #ebebeb;
         padding: 8px 15px;
       }
-      a {
+      button {
+        background: none;
+        border: none;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 6px;
         svg {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          right: 6px;
           cursor: pointer;
         }
       }
     }
   }
+
   img {
     max-width: 217.62px;
     width: 100%;
