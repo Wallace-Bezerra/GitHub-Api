@@ -8,6 +8,8 @@ import {
 interface UserContextProps {
   UserData: User;
   setUserData: Dispatch<SetStateAction<User>>;
+  setRepositories: Dispatch<any>;
+  repositories: any;
 }
 export const UserContext = createContext({} as UserContextProps);
 
@@ -28,12 +30,15 @@ interface User {
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [UserData, setUserData] = useState<User>({} as User);
-  console.log(UserData);
+  const [repositories, setRepositories] = useState<any>([]);
+  // console.log(UserData);
   return (
     <UserContext.Provider
       value={{
         UserData,
         setUserData,
+        repositories,
+        setRepositories,
       }}
     >
       {children}

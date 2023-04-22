@@ -1,37 +1,34 @@
 import { Star } from "phosphor-react/dist";
 import { CardContainer } from "./styles";
-import {
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useContext } from "react";
 import { UserContext } from "../../../../context/UserContext";
 // interface CardRepositoryProps{
 //   repos:
 // }
-let repositories: any = [];
-export const CardRepository = ({ repos }: any) => {
-  const { UserData } = useContext(UserContext);
-  const [repositories, setRepositories] = useState<any>([]);
-  // const RepoRef = useRef<any>([]);
-  const Repositorios: any = [];
-  const GetCommits = async (repo: any) => {
-    const result = await fetch(
-      `https://api.github.com/repos/${UserData.login}/${repo.name}/commits`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: "Bearer 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",
-        },
-      }
-    );
+export const CardRepository = () => {
+  const { repositories } = useContext(UserContext);
+  //   repositories?.map((repo: any) => {
+  //     const GetCommits = async () => {
+  //       const result = await fetch(
+  //         `https://api.github.com/repos/${UserData.login}/${repo.name}/commits`,
+  //         {
+  //           method: "GET",
+  //           headers: {
+  //             Authorization: "Bearer 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",
+  //           },
+  //         }
+  //       );
+  //       const data = await result.json();
 
-    return await result.json();
-  };
-  const resultsFetch: any = [];
-  useEffect(() => {}, []);
+  //       setCommits((prev: any) => {
+  //         return [...prev, data];
+  //       });
+  //       // console.log(data);
+  //     };
+  //     // GetCommits();
+  //   });
+  //   console.log("rerere");
+  // }, []);
   //   const result = await fetch(
   //     `https://api.github.com/repos/${UserData.login}/${repoName}/commits`,
   //     {
@@ -84,42 +81,43 @@ export const CardRepository = ({ repos }: any) => {
   //   }
   // };
   // console.log(repositories);
-  repos?.forEach((repo: any) => {
-    resultsFetch.push(GetCommits(repo));
-    Repositorios.push({
-      id: repo.id,
-      name: repo.name,
-      pushed_at: repo.pushed_at,
-      language: repo.language,
-    });
-    // console.log(resultsFetch);
+  // repos?.forEach((repo: any) => {
+  //   resultsFetch.push(GetCommits(repo));
+  // Repositorios.push({
+  //   id: repo.id,
+  //   name: repo.name,
+  //   pushed_at: repo.pushed_at,
+  //   language: repo.language,
+  // });
+  // console.log(resultsFetch);
 
-    // setRepositories((prev: any) => {
-    //   return [
-    //     ...prev,
-    //     {
-    //       commits: result,
-    //       id: repo.id,
-    //       name: repo.name,
-    //       pushed_at: repo.pushed_at,
-    //       language: repo.language,
-    //     },
-    //   ];
-    // });
-  });
-  Promise.all(resultsFetch).then((res) =>
-    Repositorios.forEach(
-      (element: any, index: any) => {
-        element.teste = res[index].length;
-      }
-      // console.log(res[index].length);
-    )
-  );
-  console.log(Repositorios[0].teste);
-  // console.log(Repositorios[0].teste);
+  // setRepositories((prev: any) => {
+  //   return [
+  //     ...prev,
+  //     {
+  //       commits: result,
+  //       id: repo.id,
+  //       name: repo.name,
+  //       pushed_at: repo.pushed_at,
+  //       language: repo.language,
+  //     },
+  //   ];
+  // });
+  // });
+  // Promise.all(resultsFetch).then((res) =>
+  //   Repositorios.forEach(
+  //     (element: any, index: any) => {
+  //       element.teste = res[index].length;
+  //     }
+  //     // console.log(res[index].length);
+  //   )
+  // );
+
+  // console.log(commits[0]?.length);
+  console.log(repositories);
   return (
     <>
-      {Repositorios.map((repo: any) => {
+      {repositories?.map((repo: any) => {
         return (
           <CardContainer key={repo.id}>
             <div className="heading">
@@ -142,8 +140,7 @@ export const CardRepository = ({ repos }: any) => {
                 </li>
               </ul>
               <div>
-                <p> Commits</p>
-                {Repositorios[0].teste}
+                <p>{repo.commits === 30 ? "+30" : repo.commits} Commits</p>
               </div>
             </div>
           </CardContainer>

@@ -32,7 +32,7 @@ export const Dashboard = () => {
         {
           method: "GET",
           headers: {
-            Authorization: "Bearer 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",
+            Authorization: "Bearer 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",
           },
         }
       );
@@ -46,7 +46,7 @@ export const Dashboard = () => {
       // navigate("/404");
     }
   };
-  console.log(UserData, "TESTE");
+  // console.log(UserData, "TESTE");
   return (
     <DashboardContainer>
       {!error && (

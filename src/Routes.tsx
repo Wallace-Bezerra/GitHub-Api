@@ -1,16 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Home } from "./pages/Home";
 import { User } from "./pages/User";
-import { Repositories } from "./pages/Repositories";
 import { Favorites } from "./pages/Favorites";
 import { Dashboard } from "./components/Dashboard";
 import { useContext } from "react";
 import { UserContext } from "./context/UserContext";
 import { NotFound } from "./pages/NotFound";
+import Repositories from "./pages/Repositories";
 
 export const Router = () => {
   const { UserData } = useContext(UserContext);
-  console.log("USERDATA", UserData);
   return (
     <BrowserRouter>
       <Routes>

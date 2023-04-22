@@ -10,7 +10,7 @@ import { UserContext } from "../../context/UserContext";
 
 export const User = () => {
   const { UserData } = useContext(UserContext);
-  console.log(UserData.public_repos);
+  // console.log(UserData.public_repos);
   return (
     <GridUser>
       <CardUser>
@@ -29,7 +29,7 @@ export const User = () => {
       </CardUser>
       <CardContainer className="repository">
         <h2>
-          Repositorios <span>{UserData.public_repos}</span>
+          Repositorios Públicos <span>{UserData.public_repos}</span>
         </h2>
       </CardContainer>
 
