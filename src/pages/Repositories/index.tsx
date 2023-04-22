@@ -22,7 +22,8 @@ const Repositories = () => {
         {
           method: "GET",
           headers: {
-            Authorization: "Bearer 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",
+            Authorization:
+              "Bearer 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",
           },
         }
       );
@@ -65,7 +66,8 @@ const Repositories = () => {
           return fetch(item.urlCommits, {
             method: "GET",
             headers: {
-              Authorization: "Bearer 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",
+              Authorization:
+                "Bearer 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",
             },
           }).then((response) => response.json());
         })
