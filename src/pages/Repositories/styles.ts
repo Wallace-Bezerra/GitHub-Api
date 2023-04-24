@@ -16,16 +16,13 @@ export const Wrapper = styled.div`
   ::-webkit-scrollbar-thumb {
     background-color: #484d5f;
     border-radius: 20px; /* roundness of the scroll thumb */
-    /* border: 3px solid #1f2432; */
-    /* margin-bottom: 20px; */
   }
 `;
 export const RepositoriesContainer = styled.div`
-  /* height: 100%; */
   display: flex;
   flex-direction: column;
   gap: 20px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
 `;

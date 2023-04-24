@@ -63,15 +63,20 @@ export const HomeContainer = styled.div`
         top: 50%;
         transform: translateY(-50%);
         right: 6px;
+        display: flex;
+        transition: scale 0.4s;
+        :hover {
+          scale: 1.1;
+        }
         svg {
           cursor: pointer;
         }
       }
     }
-  }
 
-  img {
-    max-width: 217.62px;
-    width: 100%;
+    img {
+      max-width: 217.62px;
+      width: 100%;
+    }
   }
 `;

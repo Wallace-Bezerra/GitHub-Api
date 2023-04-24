@@ -33,7 +33,7 @@ export const Dashboard = () => {
           method: "GET",
           headers: {
             Authorization:
-              "Bearer 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",
+              "Bearer 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",
           },
         }
       );

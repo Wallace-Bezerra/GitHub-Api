@@ -6,7 +6,7 @@ export const DashboardContainer = styled.div`
   gap: 60px;
   max-width: 1000px;
   width: 100%;
-  height: 493.76px;
+  height: 600px;
   background: linear-gradient(
     105.66deg,
     #101724 18.56%,
