@@ -5,7 +5,6 @@ import { RepositoriesContainer, Wrapper } from "./styles";
 import { UserContext } from "../../context/UserContext";
 
 const Repositories = () => {
-  // const [Repos, setRepos] = useState<any>([]);
   const { UserData, setRepositories, repositories } = useContext(UserContext);
   useEffect(() => {
     // if (repositories.length === 0) {
