@@ -20,7 +20,7 @@ export const Dashboard = () => {
   useEffect(() => {
     FetchData();
   }, []);
-
+  console.log(import.meta.env.VITE_SOME_KEY);
   const { UserData, setUserData } = useContext(UserContext);
   const [error, setError] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -32,8 +32,7 @@ export const Dashboard = () => {
         {
           method: "GET",
           headers: {
-            Authorization:
-              "Bearer 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",
+            Authorization: `Bearer ${import.meta.env.VITE_SOME_KEY} `,
           },
         }
       );
