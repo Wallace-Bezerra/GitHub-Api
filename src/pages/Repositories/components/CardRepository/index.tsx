@@ -114,6 +114,7 @@ export const CardRepository = () => {
   // console.log(commits[0]?.length);
   return (
     <>
+      {console.log(repositories)}
       {repositories?.map((repo: any) => {
         const LanguageRepo = Object.keys(repo.languages).map((item, index) => {
           return {
