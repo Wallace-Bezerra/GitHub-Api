@@ -21,8 +21,7 @@ export const Wrapper = styled.div`
 export const RepositoriesContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  display: flex;
-  flex-direction: column;
   gap: 30px;
+  /* width: max-content; */
+  min-height: 100%;
 `;

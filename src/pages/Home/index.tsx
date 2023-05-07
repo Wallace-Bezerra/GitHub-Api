@@ -26,7 +26,11 @@ export const Home = () => {
             setUserData({ ...UserData, login: UserRef.current?.value });
           }}
         >
-          <input type="text" ref={UserRef} required />
+          <input type="text" ref={UserRef} required list="suggestion" />
+          <datalist id="suggestion">
+            <option>Wallace-Bezerra</option>
+            <option>zenorocha</option>
+          </datalist>
           <button type="submit">
             <MagnifyingGlass size={24} weight="bold" />
           </button>

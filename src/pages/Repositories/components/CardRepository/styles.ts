@@ -10,6 +10,9 @@ export const CardContainer = styled.div`
   background: #252a3a;
   backdrop-filter: blur(3.41297px);
   border-radius: 11.3766px;
+  :last-child {
+    /* background-color: blue; */
+  }
   .heading {
     display: flex;
     justify-content: space-between;
@@ -52,3 +55,4 @@ export const CardContainer = styled.div`
     }
   }
 `;
+export const cardStyleClass = CardContainer.toString();

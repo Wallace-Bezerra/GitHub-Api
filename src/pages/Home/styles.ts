@@ -55,6 +55,9 @@ export const HomeContainer = styled.div`
         line-height: 19px;
         color: #ebebeb;
         padding: 8px 15px;
+        ::-webkit-calendar-picker-indicator {
+          opacity: 0;
+        }
       }
       button {
         background: none;
@@ -73,10 +76,9 @@ export const HomeContainer = styled.div`
         }
       }
     }
-
-    img {
-      max-width: 217.62px;
-      width: 100%;
-    }
+  }
+  img {
+    max-width: 286px;
+    width: 100%;
   }
 `;

@@ -13,15 +13,22 @@ import { UserContext } from "../../context/UserContext";
 
 const Repositories = () => {
   const [page, setPage] = useState(1);
-  // const lastpage = useRef<number>();
+  const lastPage = useRef<number>(1);
+  const elementLast = useRef<HTMLDivElement | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { UserData, setRepositories, repositories } = useContext(UserContext);
-  let lastPage: any;
+
   useEffect(() => {
-    console.log(lastPage, "lastPage");
-    if (page == lastPage) {
+    console.log(lastPage.current, "lastPage");
+    if (page <= lastPage.current) {
+      FetchData();
+
       // return console.log("Não há mais repositórios");
+    } else {
+      console.log("Não há mais repositórios");
     }
-    FetchData();
+
+    console.log(elementLast);
     return () => {
       if (page >= 1 && window.location.pathname === "/user/repositories") {
         return;
@@ -29,10 +36,33 @@ const Repositories = () => {
       setRepositories([]);
     };
   }, [UserData, page]);
-  console.log(page, "page");
+  console.log(elementLast);
 
+  useEffect(() => {
+    let options = {
+      // root: document.querySelector("test"),
+      rootMargin: "-20px",
+      threshold: 1.0,
+    };
+    let observer = new IntersectionObserver((entries: any) => {
+      if (entries[0].isIntersecting) {
+        console.log("To vendooo");
+        if (page <= lastPage.current!) {
+          setPage((prev) => prev + 1);
+        }
+      }
+    }, options);
+    console.log("element", elementLast.current);
+    // observer.observe(document.querySelector<HTMLDivElement>(".last")!);
+    observer.observe(elementLast.current!);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+  console.log(isLoading);
   const FetchData = async () => {
     try {
+      setIsLoading(true);
       const result = await fetch(
         `https://api.github.com/users/${UserData.login}/repos?&per_page=10&page=${page}&sort=pushed`,
         {
@@ -45,21 +75,18 @@ const Repositories = () => {
       if (result.status === 404) {
         throw new Error("Não existe");
       }
-      // console.log(result.headers.get("link"));
-
       result.headers
         .get("link")
         ?.split(",")
         .forEach((i) => {
           if (i.includes("last")) {
             const urlPage = i.split(";")[0].replace("<", "");
-            // lastPage = urlPage;
-            lastPage = new URL(urlPage).searchParams.get("page");
-            console.log(lastPage);
+            lastPage.current = Number(
+              new URL(urlPage).searchParams.get("page")
+            );
+            console.log(lastPage.current);
           }
         });
-
-      // ); logica para paginação
 
       const data = await result.json();
       console.log("repos", data);
@@ -97,9 +124,7 @@ const Repositories = () => {
       });
       const RESPONSE = await Promise.all(repositoriesFetch);
       setRepositories([...repositories, ...RESPONSE]);
-      // setRepositories(() => {
-      //   return RESPONSE;
-      // });
+      setIsLoading(false);
       console.log(RESPONSE);
     } catch (error) {
       // setError(true);
@@ -118,14 +143,16 @@ const Repositories = () => {
           left: "200px",
         }}
         onClick={() => {
-          setPage((prev) => prev + 1);
+          if (page !== lastPage.current) {
+            setPage((prev) => prev + 1);
+          }
         }}
       >
         carregar mais
       </button>
       <Wrapper>
         <RepositoriesContainer>
-          <CardRepository />
+          <CardRepository elementLast={elementLast} isLoading={isLoading} />
         </RepositoriesContainer>
       </Wrapper>
     </>

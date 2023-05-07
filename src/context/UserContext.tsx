@@ -27,6 +27,9 @@ interface User {
   public_repos: number;
   created_at: string;
 }
+interface Repositories {
+  // create inteface
+}
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [UserData, setUserData] = useState<User>({} as User);
