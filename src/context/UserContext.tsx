@@ -8,8 +8,8 @@ import {
 interface UserContextProps {
   UserData: User;
   setUserData: Dispatch<SetStateAction<User>>;
-  setRepositories: Dispatch<any>;
-  repositories: any;
+  setRepositories: Dispatch<SetStateAction<RepositoriesI[]>>;
+  repositories: RepositoriesI[];
 }
 export const UserContext = createContext({} as UserContextProps);
 
@@ -27,13 +27,20 @@ interface User {
   public_repos: number;
   created_at: string;
 }
-interface Repositories {
+export interface RepositoriesI {
   // create inteface
+  id: number;
+  name: string;
+  language: string;
+  languages: object;
+  commits: number;
+  html_url: string;
+  pushed_at: string;
 }
 
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [UserData, setUserData] = useState<User>({} as User);
-  const [repositories, setRepositories] = useState<any>([]);
+  const [repositories, setRepositories] = useState<RepositoriesI[]>([]);
   // console.log(UserData);
   return (
     <UserContext.Provider

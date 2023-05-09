@@ -9,26 +9,30 @@ import {
 import { Filter } from "../../components/Filter";
 import { CardRepository } from "./components/CardRepository";
 import { RepositoriesContainer, Wrapper } from "./styles";
-import { UserContext } from "../../context/UserContext";
+import { RepositoriesI, UserContext } from "../../context/UserContext";
+import { NotFind } from "../../components/NotFind";
 
 const Repositories = () => {
   const [page, setPage] = useState(1);
   const lastPage = useRef<number>(1);
   const elementLast = useRef<HTMLDivElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isNotFind, setIsNotFind] = useState(false);
   const { UserData, setRepositories, repositories } = useContext(UserContext);
-
+  let observer: IntersectionObserver;
   useEffect(() => {
     console.log(lastPage.current, "lastPage");
+    console.log("page", page);
     if (page <= lastPage.current) {
       FetchData();
 
       // return console.log("Não há mais repositórios");
     } else {
       console.log("Não há mais repositórios");
+      setIsNotFind(() => true);
     }
 
-    console.log(elementLast);
+    // console.log(elementLast);
     return () => {
       if (page >= 1 && window.location.pathname === "/user/repositories") {
         return;
@@ -36,30 +40,41 @@ const Repositories = () => {
       setRepositories([]);
     };
   }, [UserData, page]);
-  console.log(elementLast);
+  // console.log(elementLast);
 
-  useEffect(() => {
-    let options = {
-      // root: document.querySelector("test"),
-      rootMargin: "-20px",
-      threshold: 1.0,
-    };
-    let observer = new IntersectionObserver((entries: any) => {
-      if (entries[0].isIntersecting) {
+  const callback: IntersectionObserverCallback = (entries) => {
+    console.log(entries);
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
         console.log("To vendooo");
-        if (page <= lastPage.current!) {
+
+        console.log(page, lastPage.current);
+        // if (page <= lastPage.current!) {
+        //   setPage((prev) => prev + 1);
+        // }
+
+        if (page < lastPage.current) {
           setPage((prev) => prev + 1);
         }
       }
-    }, options);
+    });
+  };
+  useEffect(() => {
+    let options = {
+      rootMargin: "-20px",
+      threshold: 1.0,
+    };
+
+    observer = new IntersectionObserver(callback, options);
     console.log("element", elementLast.current);
     // observer.observe(document.querySelector<HTMLDivElement>(".last")!);
+    elementLast.current = document.querySelector<HTMLDivElement>(".last");
     observer.observe(elementLast.current!);
     return () => {
       observer.disconnect();
     };
   }, []);
-  console.log(isLoading);
+  // console.log(isLoading);
   const FetchData = async () => {
     try {
       setIsLoading(true);
@@ -88,9 +103,9 @@ const Repositories = () => {
           }
         });
 
-      const data = await result.json();
+      const data: RepositoriesI[] = await result.json();
       console.log("repos", data);
-      const repositoriesFetch = data.map((repo: any) => {
+      const repositoriesFetch: Promise<RepositoriesI>[] = data.map((repo) => {
         const getFetch = async () => {
           const FetchCommits = await fetch(
             `https://api.github.com/repos/${UserData.login}/${repo.name}/commits`,
@@ -110,12 +125,13 @@ const Repositories = () => {
               },
             }
           );
+          const commits = await FetchCommits.json();
           return {
-            commits: await FetchCommits.json(),
+            id: repo.id,
+            name: repo.name,
+            commits: commits.length,
             languages: await FetchLanguages.json(),
             language: repo.language,
-            name: repo.name,
-            id: repo.id,
             pushed_at: repo.pushed_at,
             html_url: repo.html_url,
           };
@@ -134,6 +150,17 @@ const Repositories = () => {
 
   return (
     <>
+      {/* <div
+        style={{
+          color: "white",
+          position: "absolute",
+          top: "50px",
+          left: "500px",
+        }}
+      >
+        <div>Pagina atua{page}</div>
+        <div>ultima pagina{lastPage.current}</div>
+      </div> */}
       <Filter />
       <button
         style={{
@@ -150,9 +177,12 @@ const Repositories = () => {
       >
         carregar mais
       </button>
+
       <Wrapper>
         <RepositoriesContainer>
-          <CardRepository elementLast={elementLast} isLoading={isLoading} />
+          <CardRepository isLoading={isLoading} />
+          {isNotFind && <NotFind />}
+          <div className="last"></div>
         </RepositoriesContainer>
       </Wrapper>
     </>

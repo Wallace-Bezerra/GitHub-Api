@@ -2,7 +2,6 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   height: 100%;
   overflow-y: auto;
-  padding-bottom: 20px;
   ::-webkit-scrollbar {
     width: 9px; /* width of the entire scrollbar */
   }
@@ -22,6 +21,8 @@ export const RepositoriesContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-  /* width: max-content; */
+  justify-content: center;
+  align-items: center;
+  max-width: 530px;
   min-height: 100%;
 `;

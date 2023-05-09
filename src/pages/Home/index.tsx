@@ -22,7 +22,7 @@ export const Home = () => {
         <form
           onSubmit={() => {
             navigate("/user/");
-            console.log(UserRef.current?.value);
+            // console.log(UserRef.current?.value);
             setUserData({ ...UserData, login: UserRef.current?.value });
           }}
         >
