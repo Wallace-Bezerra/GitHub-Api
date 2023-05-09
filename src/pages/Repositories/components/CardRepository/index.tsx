@@ -3,6 +3,7 @@ import { CardContainer } from "./styles";
 import { useContext } from "react";
 import { UserContext } from "../../../../context/UserContext";
 import { Loading } from "../../../../components/Loading";
+
 interface CardRepositoryProps {
   isLoading: boolean;
 }
