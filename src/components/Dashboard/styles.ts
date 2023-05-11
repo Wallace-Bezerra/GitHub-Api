@@ -12,7 +12,7 @@ export const DashboardContainer = styled.div`
     #101724 18.56%,
     rgba(23, 32, 49, 0.67) 91.68%
   );
-  border-radius: 5.67537px;
+  border-radius: 8px;
 `;
 export const Navbar = styled.aside`
   display: flex;
@@ -41,6 +41,7 @@ export const Navbar = styled.aside`
     width: 54.48px;
     height: 55.62px;
     border-radius: 50%;
+    cursor: pointer;
     /* border: 2.5px solid #d9d9d9; */
   }
 `;

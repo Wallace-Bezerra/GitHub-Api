@@ -10,6 +10,7 @@ import { UserContext } from "../../context/UserContext";
 
 export const User = () => {
   const { UserData } = useContext(UserContext);
+
   return (
     <GridUser>
       <CardUser>
@@ -45,7 +46,13 @@ export const User = () => {
             </span>
           </div>
         </div>
-        <p>{UserData.bio}</p>
+        <div className="infoUser">
+          <p className="bio">{UserData.bio}</p>
+          <div>
+            <p>{UserData.company}</p>
+            <p>{UserData.blog}</p>
+          </div>
+        </div>
       </ProfileUser>
 
       <LinguagueUser>

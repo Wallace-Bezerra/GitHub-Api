@@ -9,8 +9,9 @@ import { useFetchData } from "../../hooks/useFetchData";
 const Repositories = () => {
   const elementLast = useRef<HTMLDivElement | null>(null);
   const [isNotFind, setIsNotFind] = useState(false);
-  const { UserData, setRepositories } = useContext(UserContext);
-  const { FetchData, isLoading, lastPage, page, setPage } = useFetchData();
+  const { UserData, setRepositories, repositories } = useContext(UserContext);
+  const { FetchData, isLoading, lastPage, page, setPage, order, setOrder } =
+    useFetchData();
 
   let observer: IntersectionObserver;
   useEffect(() => {
@@ -18,18 +19,29 @@ const Repositories = () => {
     // console.log("page", page);
     if (page <= lastPage.current) {
       FetchData();
-    } else {
+    }
+    //  else {
+    //   console.log("Não há mais repositórios");
+    //   setIsNotFind(() => true);
+    // }
+    if (page !== 1 && page === lastPage.current) {
+      console.log(page, lastPage.current);
       console.log("Não há mais repositórios");
-      setIsNotFind(() => true);
+      setTimeout(() => {
+        setIsNotFind(() => true);
+      }, 1000);
     }
     return () => {
       if (page >= 1 && window.location.pathname === "/user/repositories") {
         return;
       }
       setRepositories([]);
+      setPage(1);
+      setIsNotFind(false);
     };
-  }, [UserData, page]);
-
+  }, [UserData, page, order]);
+  console.log(order);
+  console.log("Repositorios", repositories);
   const callback: IntersectionObserverCallback = (entries) => {
     console.log(entries);
     entries.forEach((entry) => {
@@ -40,14 +52,18 @@ const Repositories = () => {
         // if (page <= lastPage.current!) {
         //   setPage((prev) => prev + 1);
         // }
+        // if (page < lastPage.current) {
+        //   setPage((prev) => prev + 1);
+        // }
+        setPage((prev) => {
+          console.log(prev, "PREVIUS");
 
-        if (page < lastPage.current) {
-          setPage((prev) => prev + 1);
-        }
+          return prev < lastPage.current ? prev + 1 : prev;
+        });
       }
     });
   };
-  
+
   useEffect(() => {
     let options = {
       rootMargin: "-20px",
@@ -72,13 +88,33 @@ const Repositories = () => {
           position: "absolute",
           top: "50px",
           left: "500px",
+          display: "flex",
+          gap: "8px",
         }}
       >
+        <button
+          onClick={() => {
+            setPage(0);
+            setRepositories([]);
+            setOrder("asc");
+          }}
+        >
+          antigo
+        </button>
+        <button
+          onClick={() => {
+            setPage(0);
+            setRepositories([]);
+            setOrder("desc");
+          }}
+        >
+          recente
+        </button>
         <div>Pagina atua{page}</div>
         <div>ultima pagina{lastPage.current}</div>
       </div> */}
       <Filter />
-      <button
+      {/* <button
         style={{
           color: "black",
           position: "absolute",
@@ -92,12 +128,12 @@ const Repositories = () => {
         }}
       >
         carregar mais
-      </button>
+      </button> */}
       <Wrapper>
         <RepositoriesContainer>
           <CardRepository isLoading={isLoading} />
           {isNotFind && <NotFind />}
-          <div className="last"></div>
+          <div className="last" style={{ height: "2px" }}></div>
         </RepositoriesContainer>
       </Wrapper>
     </>

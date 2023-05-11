@@ -14,7 +14,8 @@ import {
 } from "./styles";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/UserContext";
+import { UserI, UserContext } from "../../context/UserContext";
+import { ModalUser } from "../ModalUser";
 
 export const Dashboard = () => {
   useEffect(() => {
@@ -22,7 +23,8 @@ export const Dashboard = () => {
   }, []);
   console.log(import.meta.env.VITE_SOME_KEY);
   const { UserData, setUserData } = useContext(UserContext);
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
   const FetchData = async () => {
@@ -36,7 +38,8 @@ export const Dashboard = () => {
           },
         }
       );
-      const data = await result.json();
+      const data: UserI = await result.json();
+      console.log(data);
       if (result.status === 404) {
         throw new Error("Não existe");
       }
@@ -46,13 +49,21 @@ export const Dashboard = () => {
       // navigate("/404");
     }
   };
-  // console.log(UserData, "TESTE");
   return (
     <DashboardContainer>
+      {isOpen && (
+        <ModalUser setIsOpen={setIsOpen} imageUser={UserData.avatar_url} />
+      )}
       {!error && (
         <>
           <Navbar>
-            <img src={UserData.avatar_url} alt="" />
+            <img
+              src={UserData.avatar_url}
+              alt="profile image"
+              onClick={() => {
+                setIsOpen((prev) => !prev);
+              }}
+            />
             <Links>
               <NavLink to=" ">
                 <User size={20} color="#ddd4d4" />

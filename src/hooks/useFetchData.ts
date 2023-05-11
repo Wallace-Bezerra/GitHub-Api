@@ -3,15 +3,24 @@ import { RepositoriesI, UserContext } from "../context/UserContext";
 
 export const useFetchData = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [page, setPage] = useState(1);
   const lastPage = useRef<number>(1);
-  const { UserData, setRepositories, repositories } = useContext(UserContext);
-  
+  // const [order, setOrder] = useState("desc");
+  const {
+    UserData,
+    setRepositories,
+    repositories,
+    page,
+    setPage,
+    order,
+    setOrder,
+  } = useContext(UserContext);
+
   const FetchData = async () => {
     try {
+      console.log("TESTEEEEEE");
       setIsLoading(true);
       const result = await fetch(
-        `https://api.github.com/users/${UserData.login}/repos?&per_page=10&page=${page}&sort=pushed`,
+        `https://api.github.com/users/${UserData.login}/repos?&per_page=10&page=${page}&sort=pushed&direction=${order}`,
         {
           method: "GET",
           headers: {
@@ -36,7 +45,7 @@ export const useFetchData = () => {
         });
 
       const data: RepositoriesI[] = await result.json();
-      // console.log("repos", data);
+      console.log("repos", data);
       const repositoriesFetch: Promise<RepositoriesI>[] = data.map((repo) => {
         const getFetch = async () => {
           const FetchCommits = await fetch(
@@ -66,6 +75,7 @@ export const useFetchData = () => {
             language: repo.language,
             pushed_at: repo.pushed_at,
             html_url: repo.html_url,
+            isFavorite: false,
           };
         };
         return getFetch();
@@ -79,5 +89,5 @@ export const useFetchData = () => {
     }
   };
 
-  return { isLoading, lastPage, page, setPage, FetchData };
+  return { isLoading, lastPage, page, setPage, FetchData, order, setOrder };
 };

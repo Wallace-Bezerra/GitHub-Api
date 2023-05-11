@@ -36,7 +36,9 @@ export const Home = () => {
           </button>
         </form>
       </div>
-      <img src={github} alt="github" />
+      <div className="imageGithub">
+        <img src={github} alt="github" />
+      </div>
     </HomeContainer>
   );
 };

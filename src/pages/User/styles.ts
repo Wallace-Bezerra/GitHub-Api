@@ -74,8 +74,13 @@ export const ProfileUser = styled(CardContainer)`
       }
     }
   }
-  p {
-    line-height: 24px;
+  .infoUser {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    .bio {
+      line-height: 24px;
+    }
   }
 `;
 

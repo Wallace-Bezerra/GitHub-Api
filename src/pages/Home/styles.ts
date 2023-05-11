@@ -77,8 +77,15 @@ export const HomeContainer = styled.div`
       }
     }
   }
-  img {
-    max-width: 286px;
-    width: 100%;
+  .imageGithub {
+    perspective: 500px;
+
+    img {
+      border-radius: 29px;
+      max-width: 286px;
+      width: 100%;
+      box-shadow: 2px 10px 30px #151927;
+      transform: rotateX(10deg) rotateY(-20deg) rotateZ(3deg);
+    }
   }
 `;

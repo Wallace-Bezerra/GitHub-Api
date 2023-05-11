@@ -23,6 +23,6 @@ export const RepositoriesContainer = styled.div`
   gap: 30px;
   justify-content: center;
   align-items: center;
-  max-width: 530px;
+  max-width: 620px;
   min-height: 100%;
 `;
