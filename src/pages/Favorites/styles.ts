@@ -20,5 +20,6 @@ export const CardFavoritesContainer = styled.div`
   display: flex;
   width: 100%;
   flex-direction: column;
-  gap: 20px;
+  gap: 30px;
+  padding-bottom: 40px;
 `;

@@ -6,8 +6,9 @@ import { CardFavoritesContainer, FavoritesContainer } from "./styles";
 import { NavLink } from "react-router-dom";
 import { Wrapper } from "../Repositories/styles";
 
-
 export const Favorites = () => {
+  // useEffect(() => {}, []);
+  // console.log(JSON.parse(localStorage.getItem("Git-api")!), "LocalStorage");
   return (
     <FavoritesContainer>
       <Filter />
@@ -19,10 +20,6 @@ export const Favorites = () => {
 
       <Wrapper>
         <CardFavoritesContainer>
-          <CardFavorites />
-          <CardFavorites />
-          <CardFavorites />
-          <CardFavorites />
           <CardFavorites />
         </CardFavoritesContainer>
       </Wrapper>

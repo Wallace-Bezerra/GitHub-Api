@@ -1,26 +1,42 @@
 import { Star } from "phosphor-react";
 import { CardFavoritesContainer } from "./styles";
+import { useContext } from "react";
+import { UserContext } from "../../../../context/UserContext";
+import { Favorites } from "../../../Repositories/components/CardRepository/styles";
 
 export const CardFavorites = () => {
+  const { favorites, setFavorites } = useContext(UserContext);
   return (
-    <CardFavoritesContainer>
-      <div className="heading">
-        <div className="nameRepository">
-          <h2>HomeYou</h2>
-          <span>JavaScript</span>
-        </div>
-        <Star size={20} />
-      </div>
-      <div className="footer">
-        <span>3 Meses atrás</span>
-        <div className="profileUser">
-          <img
-            src="https://avatars.githubusercontent.com/u/89711908?v=4"
-            alt=""
-          />
-          <p>Wallace-bezerra</p>
-        </div>
-      </div>
-    </CardFavoritesContainer>
+    <>
+      {console.log(favorites)}
+      {favorites?.map((favorite) => {
+        return (
+          <CardFavoritesContainer key={favorite.id}>
+            <div className="heading">
+              <div className="nameRepository">
+                <a href={favorite.html_url} target="_blank">
+                  {favorite.name}
+                </a>
+                <span>{favorite.language}</span>
+              </div>
+              <Favorites isFavorite={favorite.isFavorite}>
+                <Star size={20} />
+              </Favorites>
+            </div>
+            <div className="footer">
+              <span>{new Date(favorite.pushed_at).toLocaleDateString()}</span>
+              <a
+                href={`https://github.com/${favorite.login}`}
+                target="_blank"
+                className="profileUser"
+              >
+                <img src={favorite.avatar_url} alt="image profile" />
+                <p>{favorite.login}</p>
+              </a>
+            </div>
+          </CardFavoritesContainer>
+        );
+      })}
+    </>
   );
 };

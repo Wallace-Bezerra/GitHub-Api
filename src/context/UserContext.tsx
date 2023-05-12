@@ -3,6 +3,7 @@ import {
   ReactNode,
   SetStateAction,
   createContext,
+  useEffect,
   useState,
 } from "react";
 interface UserContextProps {
@@ -14,6 +15,8 @@ interface UserContextProps {
   setOrder: Dispatch<SetStateAction<string>>;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
+  setFavorites: Dispatch<SetStateAction<FavoritesI[]>>;
+  favorites: FavoritesI[];
 }
 export const UserContext = createContext({} as UserContextProps);
 
@@ -45,11 +48,28 @@ export interface RepositoriesI {
   isFavorite?: boolean;
 }
 
+export interface FavoritesI {
+  id: number;
+  name: string;
+  language: string;
+  html_url: string;
+  pushed_at: string;
+  pushed_now: string;
+  isFavorite?: boolean;
+  login?: string;
+  avatar_url: string;
+}
 export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [UserData, setUserData] = useState<UserI>({} as UserI);
   const [repositories, setRepositories] = useState<RepositoriesI[]>([]);
+  const [favorites, setFavorites] = useState<FavoritesI[]>(
+    JSON.parse(localStorage.getItem("Git-api")!) || []
+  );
   const [order, setOrder] = useState("desc");
   const [page, setPage] = useState(1);
+  useEffect(() => {
+    localStorage.setItem("Git-api", JSON.stringify(favorites));
+  }, [favorites]);
   // console.log(UserData);
   return (
     <UserContext.Provider
@@ -62,6 +82,8 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
         setOrder,
         page,
         setPage,
+        favorites,
+        setFavorites,
       }}
     >
       {children}

@@ -13,9 +13,6 @@ export const CardContainer = styled.div`
   background: #252a3a;
   backdrop-filter: blur(3.41297px);
   border-radius: 11.3766px;
-  :last-child {
-    /* background-color: blue; */
-  }
   .heading {
     display: flex;
     justify-content: space-between;
@@ -23,7 +20,6 @@ export const CardContainer = styled.div`
       margin-bottom: 4px;
       font-size: 24px;
       display: block;
-      /* word-break: break-all; */
     }
     svg {
       cursor: pointer;
@@ -80,10 +76,15 @@ export const CardContainer = styled.div`
   }
 `;
 export const Favorites = styled.div<FavoritesProps>`
+  align-self: flex-start;
   svg {
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     path {
       fill: ${({ isFavorite }) => (isFavorite ? "white" : "transparent")};
     }
+    /* &:hover {
+      scale: ${({ isFavorite }) => (isFavorite ? 1.2 : 1)};
+    } */
   }
 `;
 export const cardStyleClass = CardContainer.toString();

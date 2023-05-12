@@ -1,6 +1,6 @@
 import { useContext, useEffect, memo, useState, useRef } from "react";
 import { Filter } from "../../components/Filter";
-import { CardRepository } from "./components/CardRepository";
+import CardRepository from "./components/CardRepository";
 import { RepositoriesContainer, Wrapper } from "./styles";
 import { UserContext } from "../../context/UserContext";
 import { NotFind } from "../../components/NotFind";

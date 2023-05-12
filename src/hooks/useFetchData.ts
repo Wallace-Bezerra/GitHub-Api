@@ -66,6 +66,16 @@ export const useFetchData = () => {
               },
             }
           );
+          // id me ajuda!
+          const resultIsFavorite = JSON.parse(
+            localStorage.getItem("Git-api")!
+          ).filter((item: any) => {
+            if (item.id === repo.id) {
+              console.log("È iguallllll", repo.id, repo.name);
+            }
+            return item.id === repo.id;
+          });
+          console.log(resultIsFavorite, "resut is Favorite");
           const commits = await FetchCommits.json();
           return {
             id: repo.id,
@@ -75,7 +85,7 @@ export const useFetchData = () => {
             language: repo.language,
             pushed_at: repo.pushed_at,
             html_url: repo.html_url,
-            isFavorite: false,
+            isFavorite: resultIsFavorite.length ? true : false,
           };
         };
         return getFetch();

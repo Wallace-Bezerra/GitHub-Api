@@ -1,7 +1,7 @@
-import { Star } from "phosphor-react/dist";
+import { Flag, Star } from "phosphor-react/dist";
 import { CardContainer, Favorites } from "./styles";
-import { useContext, useState } from "react";
-import { UserContext } from "../../../../context/UserContext";
+import { memo, useContext, useState } from "react";
+import { FavoritesI, UserContext } from "../../../../context/UserContext";
 import { Loading } from "../../../../components/Loading";
 
 interface CardRepositoryProps {
@@ -11,9 +11,10 @@ interface languagesRepositoryProps {
   language: string;
   value: number;
 }
-export const CardRepository = ({ isLoading }: CardRepositoryProps) => {
+const CardRepository = ({ isLoading }: CardRepositoryProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const { repositories, setRepositories } = useContext(UserContext);
+  const { UserData, repositories, setRepositories, setFavorites, favorites } =
+    useContext(UserContext);
   return (
     <>
       {console.log(repositories)}
@@ -58,7 +59,80 @@ export const CardRepository = ({ isLoading }: CardRepositoryProps) => {
                 <span>{repo.language}</span>
               </div>
               <Favorites
-                
+                onClick={() => {
+                  // setIsFavorite(!isFavorite);
+                  // if (favorites.includes(
+                  // if (favorites.includes(repo.id)) {
+                  //   console.log("INCLUI");
+                  // }
+
+                  let Duplicate = favorites.filter((item) => {
+                    return item.id === repo.id;
+                  });
+                  if (Duplicate.length > 0) {
+                    console.log("Já existe");
+                    const filtredRepositories = repositories.map((repoItem) => {
+                      if (repoItem.id === repo.id) {
+                        console.log("YESS igual");
+                        console.log(repoItem.id, repo.id);
+                        return {
+                          ...repoItem,
+                          isFavorite: !repoItem.isFavorite,
+                        };
+                      }
+                      return repoItem;
+                    });
+                    const FilterFavorites = favorites.filter((item) => {
+                      return item.id !== repo.id;
+                    });
+                    setFavorites(FilterFavorites);
+                    setRepositories(() => filtredRepositories);
+                    return;
+                  }
+                  console.log(Duplicate);
+
+                  setIsFavorite((prev) => !prev);
+                  // setRepositories([]);
+                  console.log(isFavorite, "apos prev");
+                  const filtredRepositories = repositories.map((repoItem) => {
+                    if (repoItem.id === repo.id) {
+                      console.log("YESS igual");
+                      console.log(repoItem.id, repo.id);
+                      return {
+                        ...repoItem,
+                        isFavorite: !repoItem.isFavorite,
+                      };
+                    }
+                    return repoItem;
+                  });
+
+                  setFavorites((prev) => {
+                    const favorites = [
+                      ...prev,
+                      {
+                        id: repo.id,
+                        name: repo.name,
+                        language: repo.language,
+                        html_url: repo.html_url,
+                        pushed_at: repo.pushed_at,
+                        pushed_now: new Date().toISOString(),
+                        isFavorite: filtredRepositories[index]!.isFavorite,
+                        login: UserData.login,
+                        avatar_url: UserData.avatar_url,
+                      },
+                    ];
+                    // localStorage.setItem("Git-api", JSON.stringify(favorites));
+                    return favorites;
+                  });
+                  setRepositories(() => filtredRepositories);
+
+                  // setRepositories((prev) => [
+                  //   ...prev,
+                  //   (prev[index] = { ...repo, isFavorite: true }),
+                  //   // index:{ ...repo, isFavorite: true }
+                  //   // { ...repo, isFavorite: isFavorite },
+                  // ]);
+                }}
                 isFavorite={repo.isFavorite}
               >
                 <Star size={20} />
@@ -82,3 +156,5 @@ export const CardRepository = ({ isLoading }: CardRepositoryProps) => {
     </>
   );
 };
+
+export default memo(CardRepository);
