@@ -30,7 +30,7 @@ export const HomeContainer = styled.div`
     flex-direction: column;
     gap: 44px;
     h1 {
-      max-width: 401px;
+      max-width: 355px;
       width: 100%;
       font-family: "Inter";
       color: #ffffff;
@@ -78,14 +78,26 @@ export const HomeContainer = styled.div`
     }
   }
   .imageGithub {
-    perspective: 500px;
-
+    perspective: 1244px;
+    transform: rotateX(3deg) rotateY(8deg) rotateZ(3deg);
     img {
       border-radius: 29px;
       max-width: 286px;
       width: 100%;
       box-shadow: 2px 10px 30px #151927;
       transform: rotateX(10deg) rotateY(-20deg) rotateZ(3deg);
+    }
+  }
+  @media (max-width: 1100px) {
+    min-height: 100vh;
+    border-radius: 0px;
+  }
+  @media (max-width: 600px) {
+    padding-inline: 34px;
+    .InputContainer {
+      h1 {
+        font-size: 38px;
+      }
     }
   }
 `;

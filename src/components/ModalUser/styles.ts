@@ -1,8 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  /* width: 600px; */
-  /* height: 600px; */
   width: 100%;
   height: 100%;
   background: rgba(15, 14, 14, 0.65);
@@ -30,5 +28,8 @@ export const Container = styled.div`
     border-radius: 50%;
     max-width: 249px;
     filter: drop-shadow(0px 4.5403px 248.581px rgba(170, 199, 233, 0.35));
+  }
+  @media (max-width: 1100px) {
+    border-radius: 0px;
   }
 `;

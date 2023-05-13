@@ -14,6 +14,16 @@ export const FavoritesContainer = styled.div`
     rgba(23, 32, 49, 0.67) 91.68%
   );
   border-radius: 5.67537px;
+  @media (max-width: 1100px) {
+    min-height: 100vh;
+  }
+  @media (max-width: 600px) {
+    .footer {
+      a {
+        justify-self: flex-end;
+      }
+    }
+  }
 `;
 
 export const CardFavoritesContainer = styled.div`

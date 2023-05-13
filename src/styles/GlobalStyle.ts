@@ -30,4 +30,11 @@ body{
     align-items: center;
     padding-inline: 20px;
   }
+  @media (max-width: 1100px){
+    body{
+      .App{
+        padding-inline: 0px;
+      }
+    }
+  }
 `;

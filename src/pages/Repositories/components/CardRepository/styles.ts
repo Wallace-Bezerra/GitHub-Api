@@ -32,6 +32,7 @@ export const CardContainer = styled.div`
   }
   .footer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     gap: 20px;
@@ -42,7 +43,8 @@ export const CardContainer = styled.div`
       flex-wrap: wrap;
       max-height: 65px;
       overflow-y: overlay;
-      padding-right: 1px;
+      margin-right: -8px;
+      padding-right: 14px;
       ::-webkit-scrollbar {
         width: 9px; /* width of the entire scrollbar */
       }
@@ -71,6 +73,26 @@ export const CardContainer = styled.div`
         span {
           color: #f162df;
         }
+      }
+    }
+  }
+  @media (max-width: 600px) {
+    .heading {
+      a {
+        font-size: 22px;
+      }
+    }
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr;
+      /* grid-template-rows: repeat(3, 1fr); */
+      /* align-items: flex-start; */
+      ul {
+        flex: initial;
+        /* flex-wrap: nowrap; */
+      }
+      .commits {
+        justify-self: flex-end;
       }
     }
   }

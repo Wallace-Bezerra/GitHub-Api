@@ -1,6 +1,6 @@
 import { Flag, Star } from "phosphor-react/dist";
 import { CardContainer, Favorites } from "./styles";
-import { memo, useContext, useState } from "react";
+import { memo, useContext, useMemo, useState } from "react";
 import { FavoritesI, UserContext } from "../../../../context/UserContext";
 import { Loading } from "../../../../components/Loading";
 
@@ -15,10 +15,13 @@ const CardRepository = ({ isLoading }: CardRepositoryProps) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const { UserData, repositories, setRepositories, setFavorites, favorites } =
     useContext(UserContext);
+
   return (
     <>
-      {console.log(repositories)}
       {repositories?.map((repo, index) => {
+        {
+          console.log("RENDERIZOU O CARD REPOSITORIO", index);
+        }
         let languagesRepository: languagesRepositoryProps[];
         let languagesRepositoryRender: React.ReactNode;
         if (repo.languages) {
@@ -60,12 +63,6 @@ const CardRepository = ({ isLoading }: CardRepositoryProps) => {
               </div>
               <Favorites
                 onClick={() => {
-                  // setIsFavorite(!isFavorite);
-                  // if (favorites.includes(
-                  // if (favorites.includes(repo.id)) {
-                  //   console.log("INCLUI");
-                  // }
-
                   let Duplicate = favorites.filter((item) => {
                     return item.id === repo.id;
                   });
@@ -90,9 +87,7 @@ const CardRepository = ({ isLoading }: CardRepositoryProps) => {
                     return;
                   }
                   console.log(Duplicate);
-
                   setIsFavorite((prev) => !prev);
-                  // setRepositories([]);
                   console.log(isFavorite, "apos prev");
                   const filtredRepositories = repositories.map((repoItem) => {
                     if (repoItem.id === repo.id) {
@@ -121,17 +116,9 @@ const CardRepository = ({ isLoading }: CardRepositoryProps) => {
                         avatar_url: UserData.avatar_url,
                       },
                     ];
-                    // localStorage.setItem("Git-api", JSON.stringify(favorites));
                     return favorites;
                   });
                   setRepositories(() => filtredRepositories);
-
-                  // setRepositories((prev) => [
-                  //   ...prev,
-                  //   (prev[index] = { ...repo, isFavorite: true }),
-                  //   // index:{ ...repo, isFavorite: true }
-                  //   // { ...repo, isFavorite: isFavorite },
-                  // ]);
                 }}
                 isFavorite={repo.isFavorite}
               >
@@ -141,7 +128,7 @@ const CardRepository = ({ isLoading }: CardRepositoryProps) => {
             <div className="footer">
               <span>{new Date(repo.pushed_at).toLocaleDateString()}</span>
               <ul>{languagesRepositoryRender}</ul>
-              <div>
+              <div className="commits">
                 <p>
                   {repo.commits === 30 ? "+30" : repo.commits}
                   {repo.commits === 1 ? " Commit" : " Commits"}

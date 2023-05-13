@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const GridUser = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  /* grid-template-columns: repeat(2, 1fr); */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px 30px;
 `;
 
