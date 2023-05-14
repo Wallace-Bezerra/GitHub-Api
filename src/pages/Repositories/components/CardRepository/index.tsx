@@ -1,21 +1,86 @@
-import { Flag, Star } from "phosphor-react/dist";
+import { Star } from "phosphor-react/dist";
+import commitIcon from "/commit.svg";
 import { CardContainer, Favorites } from "./styles";
-import { memo, useContext, useMemo, useState } from "react";
-import { FavoritesI, UserContext } from "../../../../context/UserContext";
+import { memo, useContext, useEffect, useRef, useState } from "react";
+import { UserContext } from "../../../../context/UserContext";
 import { Loading } from "../../../../components/Loading";
+import { useFetchData } from "../../../../hooks/useFetchData";
+import { NotFind } from "../../../../components/NotFind";
 
-interface CardRepositoryProps {
-  isLoading: boolean;
-}
 interface languagesRepositoryProps {
   language: string;
   value: number;
 }
-const CardRepository = ({ isLoading }: CardRepositoryProps) => {
+const CardRepository = () => {
   const [isFavorite, setIsFavorite] = useState(false);
+  const elementLast = useRef<HTMLDivElement | null>(null);
+  const [isNotFind, setIsNotFind] = useState(false);
+  const [isView, setIsView] = useState(false);
   const { UserData, repositories, setRepositories, setFavorites, favorites } =
     useContext(UserContext);
+  const { FetchData, isLoading, lastPage, page, setPage, order } =
+    useFetchData();
 
+  // ----------------------------------------------------
+
+  let observer: IntersectionObserver;
+  useEffect(() => {
+    // console.log(lastPage.current, "lastPage");
+    // console.log("page", page);
+    if (page <= lastPage.current) {
+      FetchData();
+    }
+    //  else {
+    //   console.log("Não há mais repositórios");
+    //   setIsNotFind(() => true);
+    // }
+    if (page !== 1 && page === lastPage.current) {
+      console.log(page, lastPage.current);
+      console.log("Não há mais repositórios");
+      setTimeout(() => {
+        setIsNotFind(() => true);
+      }, 1000);
+    }
+    return () => {
+      if (page >= 1 && window.location.pathname === "/user/repositories") {
+        return;
+      }
+      setRepositories([]);
+      setPage(1);
+      setIsNotFind(false);
+    };
+  }, [UserData, page, order]);
+  console.log(order);
+  console.log("Repositorios", repositories);
+
+  useEffect(() => {
+    let options = {
+      rootMargin: "-20px",
+      threshold: 1.0,
+    };
+
+    observer = new IntersectionObserver((entries) => {
+      setIsView(Boolean(entries[0].intersectionRatio));
+    }, options);
+    console.log("element", elementLast.current);
+
+    elementLast.current = document.querySelector<HTMLDivElement>(".last");
+    observer.observe(elementLast.current!);
+    return () => {
+      console.log("desmonteiii");
+      observer.disconnect();
+    };
+  }, [page]);
+
+  useEffect(() => {
+    if (isView) {
+      if (page < lastPage.current) {
+        setPage((prev) => prev + 1);
+      }
+    }
+  }, [isView]);
+
+  // ----------------------------------------------------------------------
   return (
     <>
       {repositories?.map((repo, index) => {
@@ -133,12 +198,14 @@ const CardRepository = ({ isLoading }: CardRepositoryProps) => {
                   {repo.commits === 30 ? "+30" : repo.commits}
                   {repo.commits === 1 ? " Commit" : " Commits"}
                 </p>
+                <img src={commitIcon} width={10} alt="commit icon" />
               </div>
             </div>
           </CardContainer>
         );
       })}
       {isLoading && <Loading width={90} />}
+      {isNotFind && <NotFind />}
       {/* {<Loading width={90} />} */}
     </>
   );

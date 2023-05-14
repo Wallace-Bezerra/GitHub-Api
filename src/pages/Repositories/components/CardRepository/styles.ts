@@ -8,7 +8,6 @@ export const CardContainer = styled.div`
   flex-direction: column;
   padding: 16px 20px;
   gap: 12px;
-  /* max-width: 540px; */
   width: 100%;
   background: #252a3a;
   backdrop-filter: blur(3.41297px);
@@ -75,6 +74,10 @@ export const CardContainer = styled.div`
         }
       }
     }
+    .commits {
+      display: flex;
+      gap: 8px;
+    }
   }
   @media (max-width: 600px) {
     .heading {
@@ -85,11 +88,8 @@ export const CardContainer = styled.div`
     .footer {
       display: grid;
       grid-template-columns: 1fr;
-      /* grid-template-rows: repeat(3, 1fr); */
-      /* align-items: flex-start; */
       ul {
         flex: initial;
-        /* flex-wrap: nowrap; */
       }
       .commits {
         justify-self: flex-end;

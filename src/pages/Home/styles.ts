@@ -90,10 +90,14 @@ export const HomeContainer = styled.div`
   }
   @media (max-width: 1100px) {
     min-height: 100vh;
+    max-width: initial;
     border-radius: 0px;
   }
   @media (max-width: 600px) {
     padding-inline: 34px;
+    .favorites {
+      right: 20px;
+    }
     .InputContainer {
       h1 {
         font-size: 38px;

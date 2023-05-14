@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const FavoritesContainer = styled.div`
   position: relative;
   padding-top: 100px;
-  padding-inline: 36px;
+  padding-inline: 20px;
   width: 1000px;
   /* width: 100%; */
   /* max-width: 1000px; */
@@ -32,4 +32,7 @@ export const CardFavoritesContainer = styled.div`
   flex-direction: column;
   gap: 30px;
   padding-bottom: 40px;
+  @media (max-width: 600px) {
+    padding-right: 20px;
+  }
 `;

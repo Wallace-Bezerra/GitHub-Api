@@ -21,16 +21,28 @@ export const User = () => {
           </div>
           <p>{UserData.login}</p>
         </div>
-
-        <div className="Followers">
-          <p>{UserData.followers}</p>
-          <span>Seguidores</span>
+        <div className="followContainer">
+          <div className="following">
+            <p>{UserData.following}</p>
+            <span>Seguindo</span>
+          </div>
+          <div className="followers">
+            <p>{UserData.followers}</p>
+            <span>Seguidores</span>
+          </div>
         </div>
       </CardUser>
       <CardContainer className="repository">
-        <h2>
-          Repositorios Públicos <span>{UserData.public_repos}</span>
-        </h2>
+        <h2>Repositorios Públicos</h2>
+        <div className="publicRepos">
+          <img src="/git-bag.png" alt="git bag" />
+          <div className="valueRepo">
+            <div className="repos">
+              <span>{UserData.public_repos}</span>
+            </div>
+            <div className="sombra"></div>
+          </div>
+        </div>
       </CardContainer>
 
       <ProfileUser>
