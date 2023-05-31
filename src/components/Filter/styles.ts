@@ -9,8 +9,8 @@ export const FilterButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 45.51px;
-  height: 26.17px;
+  width: 4.551rem;
+  height: 2.617rem;
   background: #252a3a;
   border-radius: 5.68828px;
   cursor: pointer;

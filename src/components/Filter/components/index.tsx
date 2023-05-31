@@ -1,6 +1,6 @@
 import { ArrowDown, ArrowUp } from "phosphor-react";
 import { Container } from "./styles";
-import { useFetchData } from "../../../hooks/useFetchData";
+import { useFetchDataRepositories } from "../../../hooks/useFetchDataRepositories";
 import { UserContext } from "../../../context/UserContext";
 import { useContext } from "react";
 
@@ -12,21 +12,32 @@ export const ModalFilter = ({ setIsOpen }: ModalFilterProps) => {
   const PathNamePage = window.location.pathname;
   // === "/user/repositories"
   const { setRepositories, setFavorites, favorites } = useContext(UserContext);
-  const { setPage, setOrder } = useFetchData();
+  const { setPage, setOrder } = useFetchDataRepositories();
   const orderDesc = () => {
-    setPage(0);
+    setPage(() => 1);
     setRepositories([]);
     setOrder("desc");
     setIsOpen((prev) => !prev);
   };
   const OrderAsc = () => {
-    setPage(0);
+    setPage(() => 1);
     setRepositories([]);
     setOrder("asc");
     setIsOpen((prev) => !prev);
   };
+
+  const modalAnimate = {
+    close: { opacity: 0, y: -10 },
+    open: { opacity: 1, y: 0 },
+  };
   return (
-    <Container>
+    <Container
+      variants={modalAnimate}
+      initial={"close"}
+      animate={"open"}
+      exit={"close"}
+      transition={{ type: "spring" }}
+    >
       <li
         onClick={
           PathNamePage === "/user/repositories"

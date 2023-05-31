@@ -2,6 +2,7 @@ import { SlidersHorizontal } from "phosphor-react/dist";
 import { FilterButton, FilterContainer } from "./styles";
 import { useState } from "react";
 import { ModalFilter } from "./components";
+import { AnimatePresence } from "framer-motion";
 
 export const Filter = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,7 +15,9 @@ export const Filter = () => {
       >
         <SlidersHorizontal size={20} />
       </FilterButton>
-      {isOpen && <ModalFilter setIsOpen={setIsOpen} />}
+      <AnimatePresence>
+        {isOpen && <ModalFilter setIsOpen={setIsOpen} />}
+      </AnimatePresence>
     </FilterContainer>
   );
 };

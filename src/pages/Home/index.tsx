@@ -4,22 +4,50 @@ import { HomeContainer } from "./styles";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useRef } from "react";
 import { UserContext } from "../../context/UserContext";
+import { motion } from "framer-motion";
 
 export const Home = () => {
   const navigate = useNavigate();
   const { setUserData, UserData } = useContext(UserContext);
   const UserRef = useRef<HTMLInputElement>(null);
+
+  const container = {
+    onInitial: { x: -100, opacity: 0 },
+    offAnimation: {
+      x: 0,
+      opacity: 1,
+      duration: 1.2,
+    },
+  };
+  const form = {
+    onInitial: { x: -100, opacity: 0 },
+    offAnimation: { x: 0, opacity: 1 },
+  };
   return (
     <HomeContainer>
       <Link to={"/favorites"} className="favorites">
         <FolderSimpleStar size={32} color="#ddd4d4" />
       </Link>
-      <div className="InputContainer">
+      <motion.div
+        variants={container}
+        initial={"onInitial"}
+        animate={"offAnimation"}
+        transition={{
+          when: "beforeChildren",
+          staggerChildren: 2,
+          type: "just",
+        }}
+        // transition={{ duration: 0.8, bounce: 1 }}
+        className="InputContainer"
+      >
         <h1>
           Digite um usuário do
           <span> GitHub</span>
         </h1>
-        <form
+        <motion.form
+          variants={form}
+          // initial={"onInitial"}
+          // animate={"offAnimation"}
           onSubmit={() => {
             navigate("/user/");
             // console.log(UserRef.current?.value);
@@ -34,11 +62,19 @@ export const Home = () => {
           <button type="submit">
             <MagnifyingGlass size={24} weight="bold" />
           </button>
-        </form>
-      </div>
-      <div className="imageGithub">
+        </motion.form>
+      </motion.div>
+      <motion.div
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        transition={{
+          duration: 0.5,
+          bounce: 1,
+        }}
+        className="imageGithub"
+      >
         <img src={github} alt="github" />
-      </div>
+      </motion.div>
     </HomeContainer>
   );
 };

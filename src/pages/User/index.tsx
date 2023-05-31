@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import gitBagImage from "../../assets/git-bag.png";
 import {
   CardContainer,
   CardUser,
@@ -7,19 +8,33 @@ import {
   ProfileUser,
 } from "./styles";
 import { UserContext } from "../../context/UserContext";
+import Atropos from 'atropos/react';
 
 export const User = () => {
   const { UserData } = useContext(UserContext);
-
+console.log(UserData)
+  const container = {
+    onInitial: { x: -100, opacity: 0 },
+    offAnimation: {
+      x: 0,
+      opacity: 1,
+      duration: 1.2,
+    },
+  };
   return (
-    <GridUser>
+    <GridUser
+      variants={container}
+      initial={"onInitial"}
+      animate={"offAnimation"}
+      exit={"onInitial"}
+    >
       <CardUser>
         <div className="infoUser">
           <div className="heading">
             <h2>{UserData.name} -</h2>
             <span>{UserData.location}</span>
           </div>
-          <p>{UserData.login}</p>
+          <a href={UserData.html_url} target="_blank">{UserData.login}</a>
         </div>
         <div className="followContainer">
           <div className="following">
@@ -32,10 +47,12 @@ export const User = () => {
           </div>
         </div>
       </CardUser>
+     
+      
       <CardContainer className="repository">
         <h2>Repositorios Públicos</h2>
         <div className="publicRepos">
-          <img src="/git-bag.png" alt="git bag" />
+          <img src={gitBagImage} alt="git bag" />
           <div className="valueRepo">
             <div className="repos">
               <span>{UserData.public_repos}</span>
@@ -44,29 +61,31 @@ export const User = () => {
           </div>
         </div>
       </CardContainer>
+    
 
-      <ProfileUser>
-        <div className="heading">
-          <h2>Profile</h2>
-          <div className="created">
-            <p>Desde</p>
-            <span>
-              {new Date(UserData.created_at).toLocaleDateString("pt-br", {
-                month: "long",
-                year: "numeric",
-              })}
-            </span>
+      
+        <ProfileUser>
+          <div className="heading">
+            <h2>Profile</h2>
+            <div className="created">
+              <p>Desde</p>
+              <span>
+                {new Date(UserData.created_at).toLocaleDateString("pt-br", {
+                  month: "long",
+                  year: "numeric",
+                })}
+              </span>
+            </div>
           </div>
-        </div>
-        <div className="infoUser">
-          <p className="bio">{UserData.bio}</p>
-          <div>
-            <p>{UserData.company}</p>
-            <p>{UserData.blog}</p>
+          <div className="infoUser">
+            <p className="bio">{UserData.bio}</p>
+            <div>
+              <p>{UserData.company}</p>
+              <p>{UserData.blog}</p>
+            </div>
           </div>
-        </div>
-      </ProfileUser>
-
+        </ProfileUser>
+      
       <LinguagueUser>
         <h2>Top Linguagens</h2>
         <ul className="languages">
@@ -83,7 +102,7 @@ export const User = () => {
             <span>20%</span>
           </li>
         </ul>
-      </LinguagueUser>
+        </LinguagueUser>
     </GridUser>
   );
 };

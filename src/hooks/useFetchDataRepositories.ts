@@ -1,10 +1,9 @@
 import { useContext, useRef, useState } from "react";
 import { RepositoriesI, UserContext } from "../context/UserContext";
 
-export const useFetchData = () => {
+export const useFetchDataRepositories = () => {
   const [isLoading, setIsLoading] = useState(false);
   const lastPage = useRef<number>(1);
-  // const [order, setOrder] = useState("desc");
   const {
     UserData,
     setRepositories,
@@ -15,7 +14,7 @@ export const useFetchData = () => {
     setOrder,
   } = useContext(UserContext);
 
-  const FetchData = async () => {
+  const FetchDataRepositories = async () => {
     try {
       console.log("TESTEEEEEE");
       setIsLoading(true);
@@ -99,5 +98,13 @@ export const useFetchData = () => {
     }
   };
 
-  return { isLoading, lastPage, page, setPage, FetchData, order, setOrder };
+  return {
+    isLoading,
+    lastPage,
+    page,
+    setPage,
+    FetchDataRepositories,
+    order,
+    setOrder,
+  };
 };

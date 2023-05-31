@@ -1,28 +1,64 @@
 import { House } from "phosphor-react";
+import gitIlustration from "../../assets/Git-ilustration.png";
 import { MenuBar } from "../../components/Dashboard/styles";
 import { Filter } from "../../components/Filter";
 import { CardFavorites } from "./components/CardFavorites";
-import { CardFavoritesContainer, FavoritesContainer } from "./styles";
-import { NavLink } from "react-router-dom";
+import {
+  CardFavoritesContainer,
+  ContainerNotFavorites,
+  FavoritesContainer,
+} from "./styles";
+import { Link, NavLink } from "react-router-dom";
 import { Wrapper } from "../Repositories/styles";
+import { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 
 export const Favorites = () => {
-  // useEffect(() => {}, []);
-  // console.log(JSON.parse(localStorage.getItem("Git-api")!), "LocalStorage");
+  const { favorites } = useContext(UserContext);
+  const container = {
+    onInitial: { x: -100, opacity: 0 },
+    offAnimation: {
+      x: 0,
+      opacity: 1,
+      duration: 1.2,
+    },
+  };
   return (
-    <FavoritesContainer>
-      <Filter />
-      <MenuBar>
-        <NavLink to="/">
-          <House size={32} color="#ddd4d4" />
-        </NavLink>
-      </MenuBar>
+    <FavoritesContainer favorites={favorites.length}>
+      {!favorites.length && (
+        <ContainerNotFavorites>
+          <div className="notFavoritesMessage">
+            <h1>Você ainda não favoritou nenhum repositório</h1>
+            <Link to={"/"}>Buscar agora</Link>
+          </div>
+          <img src={gitIlustration} />
+        </ContainerNotFavorites>
+      )}
+      {favorites.length > 0 && (
+        <>
+          <Filter />
+          <MenuBar>
+            <NavLink to="/">
+              <House size={32} color="#ddd4d4" />
+            </NavLink>
+          </MenuBar>
 
-      <Wrapper>
-        <CardFavoritesContainer>
-          <CardFavorites />
-        </CardFavoritesContainer>
-      </Wrapper>
+          <Wrapper>
+            <CardFavoritesContainer
+              variants={container}
+              initial={"onInitial"}
+              animate={"offAnimation"}
+              transition={{
+                when: "beforeChildren",
+                staggerChildren: 0.2,
+                type: "just",
+              }}
+            >
+              <CardFavorites />
+            </CardFavoritesContainer>
+          </Wrapper>
+        </>
+      )}
     </FavoritesContainer>
   );
 };

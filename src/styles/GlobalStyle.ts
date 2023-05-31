@@ -17,8 +17,11 @@ export const GlobalStyle = createGlobalStyle`
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  font-size: 62.5%
 }
 body{
+  font-size: 1.6rem;
     background-color: #010206;
     color: white;
   }
@@ -28,7 +31,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-inline: 20px;
+    padding-inline: 2rem;
   }
   @media (max-width: 1100px){
     body{

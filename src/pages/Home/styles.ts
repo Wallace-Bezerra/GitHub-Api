@@ -5,38 +5,38 @@ export const HomeContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 60px;
+  gap: 6rem;
   flex-wrap: wrap;
-  max-width: 1000px;
+  max-width: 100rem;
   width: 100%;
-  height: 493.76px;
-  padding: 120px;
+  height: 49.376rem;
+  padding: 12rem;
   background: linear-gradient(
     105.66deg,
     #101724 18.56%,
     rgba(23, 32, 49, 0.67) 91.68%
   );
-  border-radius: 5.67537px;
+  border-radius: 5.675px;
   .favorites {
     background-color: transparent;
     border: none;
     position: absolute;
-    top: 32px;
-    right: 32px;
+    top: 3.2rem;
+    right: 3.2rem;
     cursor: pointer;
   }
   .InputContainer {
     display: flex;
     flex-direction: column;
-    gap: 44px;
+    gap: 4.4rem;
     h1 {
-      max-width: 355px;
+      max-width: 35.5rem;
       width: 100%;
       font-family: "Inter";
       color: #ffffff;
       font-weight: 500;
-      font-size: 41.4508px;
-      line-height: 50px;
+      font-size: 4.1451rem;
+      line-height: 5rem;
       span {
         color: #8785df;
       }
@@ -46,15 +46,15 @@ export const HomeContainer = styled.div`
       align-self: flex-start;
       input {
         border: none;
-        width: 285.8px;
-        height: 36.27px;
+        width: 28.58rem;
+        height: 3.627rem;
         background: #5a6074;
-        border-radius: 3px;
+        border-radius: 0.3rem;
         font-weight: 400;
-        font-size: 16px;
-        line-height: 19px;
+        font-size: 1.6rem;
+        line-height: 1.9rem;
         color: #ebebeb;
-        padding: 8px 15px;
+        padding: 0.8rem 1.5rem;
         ::-webkit-calendar-picker-indicator {
           opacity: 0;
         }
@@ -65,7 +65,7 @@ export const HomeContainer = styled.div`
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        right: 6px;
+        right: 0.6rem;
         display: flex;
         transition: scale 0.4s;
         :hover {
@@ -78,29 +78,29 @@ export const HomeContainer = styled.div`
     }
   }
   .imageGithub {
-    perspective: 1244px;
+    perspective: 124.4rem;
     transform: rotateX(3deg) rotateY(8deg) rotateZ(3deg);
     img {
-      border-radius: 29px;
-      max-width: 286px;
+      border-radius: 2.9rem;
+      max-width: 28.6rem;
       width: 100%;
-      box-shadow: 2px 10px 30px #151927;
+      box-shadow: 0.2rem 1rem 3rem #151927;
       transform: rotateX(10deg) rotateY(-20deg) rotateZ(3deg);
     }
   }
   @media (max-width: 1100px) {
     min-height: 100vh;
     max-width: initial;
-    border-radius: 0px;
+    border-radius: 0rem;
   }
   @media (max-width: 600px) {
-    padding-inline: 34px;
+    padding-inline: 3.4rem;
     .favorites {
-      right: 20px;
+      right: 2rem;
     }
     .InputContainer {
       h1 {
-        font-size: 38px;
+        font-size: 3.8rem;
       }
     }
   }

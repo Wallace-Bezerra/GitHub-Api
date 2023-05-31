@@ -1,10 +1,10 @@
 import { Star } from "phosphor-react/dist";
-import commitIcon from "/commit.svg";
+import commitIcon from "../../../../assets/commit.svg";
 import { CardContainer, Favorites } from "./styles";
 import { memo, useContext, useEffect, useRef, useState } from "react";
-import { UserContext } from "../../../../context/UserContext";
+import { RepositoriesI, UserContext } from "../../../../context/UserContext";
 import { Loading } from "../../../../components/Loading";
-import { useFetchData } from "../../../../hooks/useFetchData";
+import { useFetchDataRepositories } from "../../../../hooks/useFetchDataRepositories";
 import { NotFind } from "../../../../components/NotFind";
 
 interface languagesRepositoryProps {
@@ -18,22 +18,16 @@ const CardRepository = () => {
   const [isView, setIsView] = useState(false);
   const { UserData, repositories, setRepositories, setFavorites, favorites } =
     useContext(UserContext);
-  const { FetchData, isLoading, lastPage, page, setPage, order } =
-    useFetchData();
+  const { FetchDataRepositories, isLoading, lastPage, page, setPage, order } =
+  useFetchDataRepositories();
 
   // ----------------------------------------------------
 
   let observer: IntersectionObserver;
   useEffect(() => {
-    // console.log(lastPage.current, "lastPage");
-    // console.log("page", page);
     if (page <= lastPage.current) {
-      FetchData();
+      FetchDataRepositories();
     }
-    //  else {
-    //   console.log("Não há mais repositórios");
-    //   setIsNotFind(() => true);
-    // }
     if (page !== 1 && page === lastPage.current) {
       console.log(page, lastPage.current);
       console.log("Não há mais repositórios");
@@ -41,6 +35,7 @@ const CardRepository = () => {
         setIsNotFind(() => true);
       }, 1000);
     }
+    setIsNotFind(false);
     return () => {
       if (page >= 1 && window.location.pathname === "/user/repositories") {
         return;
@@ -60,32 +55,97 @@ const CardRepository = () => {
     };
 
     observer = new IntersectionObserver((entries) => {
+      console.log(entries[0].intersectionRatio, "AHHHHHHHHH");
       setIsView(Boolean(entries[0].intersectionRatio));
     }, options);
-    console.log("element", elementLast.current);
-
     elementLast.current = document.querySelector<HTMLDivElement>(".last");
     observer.observe(elementLast.current!);
     return () => {
       console.log("desmonteiii");
       observer.disconnect();
     };
-  }, [page]);
+  }, []);
 
   useEffect(() => {
     if (isView) {
-      if (page < lastPage.current) {
+      if (page < lastPage.current && !isLoading) {
         setPage((prev) => prev + 1);
       }
     }
   }, [isView]);
+  const handleFavorites = (repo: RepositoriesI, index:number) => {
+    let duplicateFavorites = favorites.filter((item) => {
+      return item.id === repo.id;
+    });
+    if (duplicateFavorites.length > 0) {
+      console.log("Já existe");
+      const filtredRepositories = repositories.map((repoItem) => {
+        if (repoItem.id === repo.id) {
+          return {
+            ...repoItem,
+            isFavorite: !repoItem.isFavorite,
+          };
+        }
+        return repoItem;
+      });
+      const FilterFavorites = favorites.filter((item) => {
+        return item.id !== repo.id;
+      });
+      setFavorites(FilterFavorites);
+      setRepositories(() => filtredRepositories);
+      return;
+    }
+    setIsFavorite((prev) => !prev);
+    const filtredRepositories = repositories.map((repoItem) => {
+      if (repoItem.id === repo.id) {
+        console.log(repoItem.id, repo.id);
+        return {
+          ...repoItem,
+          isFavorite: !repoItem.isFavorite,
+        };
+      }
+      return repoItem;
+    });
 
+    setFavorites((prev) => {
+      const favorites = [
+        ...prev,
+        {
+          id: repo.id,
+          name: repo.name,
+          language: repo.language,
+          html_url: repo.html_url,
+          pushed_at: repo.pushed_at,
+          pushed_now: new Date().toISOString(),
+          isFavorite: filtredRepositories[index]!.isFavorite,
+          login: UserData.login,
+          avatar_url: UserData.avatar_url,
+        },
+      ];
+      return favorites;
+    });
+    setRepositories(() => filtredRepositories);
+ }
+  const cardItem = {
+    onInitial: { x: -100, opacity: 0 },
+    offAnimation: (i = 3) => ({
+      x: 0,
+      opacity: 1,
+      transition: {
+        delay: 0.2 * i,
+      },
+    }),
+  };
+  let INDICE: number = 0;
   // ----------------------------------------------------------------------
   return (
     <>
+      <div id="top"></div>
       {repositories?.map((repo, index) => {
-        {
-          console.log("RENDERIZOU O CARD REPOSITORIO", index);
+        if (INDICE >= 10) {
+          INDICE = 1;
+        } else {
+          INDICE = ++INDICE;
         }
         let languagesRepository: languagesRepositoryProps[];
         let languagesRepositoryRender: React.ReactNode;
@@ -118,7 +178,7 @@ const CardRepository = () => {
           );
         }
         return (
-          <CardContainer key={repo.id}>
+          <CardContainer variants={cardItem} custom={INDICE} key={repo.id}>
             <div className="heading">
               <div className="nameRepository">
                 <a target="_blank" href={repo.html_url}>
@@ -127,64 +187,7 @@ const CardRepository = () => {
                 <span>{repo.language}</span>
               </div>
               <Favorites
-                onClick={() => {
-                  let Duplicate = favorites.filter((item) => {
-                    return item.id === repo.id;
-                  });
-                  if (Duplicate.length > 0) {
-                    console.log("Já existe");
-                    const filtredRepositories = repositories.map((repoItem) => {
-                      if (repoItem.id === repo.id) {
-                        console.log("YESS igual");
-                        console.log(repoItem.id, repo.id);
-                        return {
-                          ...repoItem,
-                          isFavorite: !repoItem.isFavorite,
-                        };
-                      }
-                      return repoItem;
-                    });
-                    const FilterFavorites = favorites.filter((item) => {
-                      return item.id !== repo.id;
-                    });
-                    setFavorites(FilterFavorites);
-                    setRepositories(() => filtredRepositories);
-                    return;
-                  }
-                  console.log(Duplicate);
-                  setIsFavorite((prev) => !prev);
-                  console.log(isFavorite, "apos prev");
-                  const filtredRepositories = repositories.map((repoItem) => {
-                    if (repoItem.id === repo.id) {
-                      console.log("YESS igual");
-                      console.log(repoItem.id, repo.id);
-                      return {
-                        ...repoItem,
-                        isFavorite: !repoItem.isFavorite,
-                      };
-                    }
-                    return repoItem;
-                  });
-
-                  setFavorites((prev) => {
-                    const favorites = [
-                      ...prev,
-                      {
-                        id: repo.id,
-                        name: repo.name,
-                        language: repo.language,
-                        html_url: repo.html_url,
-                        pushed_at: repo.pushed_at,
-                        pushed_now: new Date().toISOString(),
-                        isFavorite: filtredRepositories[index]!.isFavorite,
-                        login: UserData.login,
-                        avatar_url: UserData.avatar_url,
-                      },
-                    ];
-                    return favorites;
-                  });
-                  setRepositories(() => filtredRepositories);
-                }}
+                onClick={() => { handleFavorites(repo, index) }}
                 isFavorite={repo.isFavorite}
               >
                 <Star size={20} />
@@ -206,7 +209,7 @@ const CardRepository = () => {
       })}
       {isLoading && <Loading width={90} />}
       {isNotFind && <NotFind />}
-      {/* {<Loading width={90} />} */}
+      <div className="last"></div>
     </>
   );
 };

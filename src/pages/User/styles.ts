@@ -1,22 +1,22 @@
+import { motion } from "framer-motion";
 import styled, { keyframes } from "styled-components";
 
 const float = keyframes`
   0%{
-    transform: translateY(-2px)
+    transform: translateY(-0.2rem)
   }
   100%{
-    transform: translateY(10px)
+    transform: translateY(1rem)
   }
 `;
 
-export const GridUser = styled.div`
+export const GridUser = styled(motion.div)`
   display: grid;
-  /* grid-template-columns: repeat(2, 1fr); */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px 30px;
+  gap: 2rem 3rem;
 
   &::-webkit-scrollbar {
-    width: 9px; /* width of the entire scrollbar */
+    width: 0.9rem; /* width of the entire scrollbar */
   }
   &::-webkit-scrollbar-button {
     height: 100%; /* vertical scrollbar height */
@@ -24,19 +24,19 @@ export const GridUser = styled.div`
 
   &::-webkit-scrollbar-track {
     background: #1f2432; /* color of the tracking area */
-    border-radius: 5px;
-    margin-block: 20px;
+    border-radius: 0.5rem;
+    margin-block: 2rem;
   }
 
   &::-webkit-scrollbar-thumb {
     background-color: #484d5f;
-    border-radius: 20px; /* roundness of the scroll thumb */
+    border-radius: 2rem; /* roundness of the scroll thumb */
   }
   @media (max-width: 680px) {
     height: 100%;
     overflow: auto;
-    padding-right: 20px;
-    padding-bottom: 40px;
+    padding-right: 2rem;
+    padding-bottom: 4rem;
   }
 `;
 
@@ -46,20 +46,21 @@ export const CardContainer = styled.div`
     #252a3a 46.28%,
     rgba(70, 78, 101, 0.45) 94.39%
   );
-  backdrop-filter: blur(3.40522px);
-  border-radius: 11.3507px;
-  padding-block: 20px;
-  padding-inline: 30px;
+  backdrop-filter: blur(3.405px);
+  border-radius: 11.351px;
+  padding-block: 2rem;
+  padding-inline: 3rem;
   &.repository {
     display: flex;
-    gap: 20px;
+    gap: 2rem;
+    justify-content: space-between;
   }
   .publicRepos {
-    width: 111.07px;
-    height: 107.22px;
+    width: 11.107rem;
+    height: 10.722rem;
     position: relative;
     img {
-      width: 100px;
+      width: 10rem;
     }
     .valueRepo {
       animation: ${float} 2s alternate infinite;
@@ -68,7 +69,7 @@ export const CardContainer = styled.div`
       left: -7px;
       z-index: 2;
       .repos {
-        padding: 9px;
+        padding: 0.9rem;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -76,25 +77,23 @@ export const CardContainer = styled.div`
         backdrop-filter: blur(2.5px);
         border-radius: 10px;
         transform: rotate(-7.71deg);
-        /* box-shadow: 0px -10px 0px -6px;
-      color: #52545a; */
         span {
           position: relative;
           z-index: 1;
           font-family: "Inter";
           font-style: normal;
           font-weight: 600;
-          font-size: 24px;
-          line-height: 29px;
+          font-size: 2.4rem;
+          line-height: 2.9rem;
           color: #e2e7fa;
         }
         ::after {
           content: "";
           position: absolute;
-          width: 31.42px;
-          height: 27.06px;
+          width: 3.142rem;
+          height: 2.706rem;
           background: rgba(252, 175, 47, 0.3);
-          filter: blur(18.5px);
+          filter: blur(1.85rem);
         }
       }
       .sombra {
@@ -102,11 +101,10 @@ export const CardContainer = styled.div`
         width: 100%;
         height: 100%;
         z-index: -1;
-        top: -2px;
-        left: -4px;
+        top: -0.2rem;
+        left: -0.4rem;
         background: rgba(107, 112, 115, 0.53);
-        /* backdrop-filter: blur(6.5px); */
-        border-radius: 10px;
+        border-radius: 1rem;
         transform: rotate(-7.71deg);
       }
     }
@@ -117,43 +115,44 @@ export const CardUser = styled(CardContainer)`
   .infoUser {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0.4rem;
     .heading {
       display: flex;
       align-items: center;
-      gap: 5px 12px;
+      gap: 0.5rem 1.2rem;
       flex-wrap: wrap;
     }
-    p {
-      margin-top: 8px;
+    a {
+      width: max-content;
+      margin-top: 0.8rem;
       font-weight: 400;
-      font-size: 18.1612px;
-      line-height: 22px;
+      font-size: 1.8161rem;
+      line-height: 2.2rem;
       color: #c5e0f9;
     }
   }
   .followContainer {
     display: flex;
-    gap: 14px;
+    gap: 1.4rem;
     justify-content: flex-end;
-    padding-top: 20px;
+    padding-top: 2rem;
     .followers,
     .following {
       display: flex;
       justify-content: flex-end;
       align-items: center;
-      gap: 8px;
+      gap: 0.8rem;
 
       p {
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 2px 6px;
+        padding: 0.2rem 0.6rem;
         background: #c5e0f9;
-        border-radius: 3.40522px;
+        border-radius: 3.405px;
         font-weight: 600;
-        font-size: 15.891px;
-        line-height: 19px;
+        font-size: 1.5891rem;
+        line-height: 1.9rem;
         color: #0060b8;
       }
     }
@@ -166,11 +165,11 @@ export const ProfileUser = styled(CardContainer)`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 16px;
+    margin-bottom: 1.6rem;
     .created {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 0.8rem;
       p {
         color: #c5e0f9;
       }
@@ -179,9 +178,9 @@ export const ProfileUser = styled(CardContainer)`
   .infoUser {
     display: flex;
     flex-direction: column;
-    gap: 14px;
+    gap: 1.4rem;
     .bio {
-      line-height: 24px;
+      line-height: 2.4rem;
     }
   }
 `;
@@ -190,21 +189,21 @@ export const LinguagueUser = styled(CardContainer)`
   .languages {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 22px;
+    gap: 1rem;
+    margin-top: 2.2rem;
     li {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 2rem;
       p {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 66px;
-        height: 25px;
+        width: 6.6rem;
+        height: 2.5rem;
         text-align: center;
         background: #a59f7e;
-        border-radius: 3.40522px;
+        border-radius: 3.405px;
       }
     }
   }

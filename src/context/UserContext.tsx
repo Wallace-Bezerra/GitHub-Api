@@ -31,6 +31,7 @@ export interface UserI {
   followers: number;
   following: number;
   location: string;
+  html_url: string;
   company: string;
   blog: string;
   public_repos: number;
@@ -70,7 +71,7 @@ export const UserContextProvider = ({ children }: UserContextProviderProps) => {
   useEffect(() => {
     localStorage.setItem("Git-api", JSON.stringify(favorites));
   }, [favorites]);
-  // console.log(UserData);
+
   return (
     <UserContext.Provider
       value={{

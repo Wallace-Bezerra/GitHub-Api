@@ -6,7 +6,7 @@ export const CardFavoritesContainer = styled(CardContainer)`
   .heading {
     .nameRepository {
       a {
-        margin-bottom: 4px;
+        margin-bottom: 0.4rem;
       }
     }
   }
@@ -15,11 +15,12 @@ export const CardFavoritesContainer = styled(CardContainer)`
       cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 1rem;
       img {
-        width: 30px;
+        width: 3rem;
         border-radius: 50%;
       }
     }
   }
 `;
+

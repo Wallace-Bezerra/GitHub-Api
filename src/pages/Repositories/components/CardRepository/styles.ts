@@ -1,23 +1,24 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 
 interface FavoritesProps {
   isFavorite: boolean | undefined;
 }
-export const CardContainer = styled.div`
+export const CardContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  padding: 16px 20px;
-  gap: 12px;
+  padding: 1.6rem 2rem;
+  gap: 1.2rem;
   width: 100%;
   background: #252a3a;
-  backdrop-filter: blur(3.41297px);
-  border-radius: 11.3766px;
+  backdrop-filter: blur(0.3413rem);
+  border-radius: 11.377px;
   .heading {
     display: flex;
     justify-content: space-between;
     a {
-      margin-bottom: 4px;
-      font-size: 24px;
+      margin-bottom: 0.4rem;
+      font-size: 2.4rem;
       display: block;
     }
     svg {
@@ -34,18 +35,18 @@ export const CardContainer = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 2rem;
     ul {
       display: flex;
-      gap: 10px;
+      gap: 1rem;
       flex: 1;
       flex-wrap: wrap;
-      max-height: 65px;
+      max-height: 6.5rem;
       overflow-y: overlay;
-      margin-right: -8px;
-      padding-right: 14px;
+      margin-right: -0.8rem;
+      padding-right: 1.4rem;
       ::-webkit-scrollbar {
-        width: 9px; /* width of the entire scrollbar */
+        width: 0.9rem; /* width of the entire scrollbar */
       }
       ::-webkit-scrollbar-button {
         height: 100%; /* vertical scrollbar height */
@@ -53,22 +54,22 @@ export const CardContainer = styled.div`
 
       ::-webkit-scrollbar-track {
         background: #1f2432; /* color of the tracking area */
-        border-radius: 5px;
-        margin-block: 20px;
+        border-radius: 0.5rem;
+        margin-block: 2rem;
       }
 
       ::-webkit-scrollbar-thumb {
         background-color: #484d5f;
-        border-radius: 20px; /* roundness of the scroll thumb */
+        border-radius: 2rem; /* roundness of the scroll thumb */
       }
       li {
         display: flex;
-        gap: 10px;
+        gap: 1rem;
         flex-wrap: wrap;
         background-color: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(3.41297px);
-        padding: 3px 6px;
-        border-radius: 4px;
+        backdrop-filter: blur(0.3413rem);
+        padding: 0.3rem 0.6rem;
+        border-radius: 0.4rem;
         span {
           color: #f162df;
         }
@@ -76,13 +77,13 @@ export const CardContainer = styled.div`
     }
     .commits {
       display: flex;
-      gap: 8px;
+      gap: 0.8rem;
     }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 60rem) {
     .heading {
       a {
-        font-size: 22px;
+        font-size: 2.2rem;
       }
     }
     .footer {
@@ -109,4 +110,3 @@ export const Favorites = styled.div<FavoritesProps>`
     } */
   }
 `;
-export const cardStyleClass = CardContainer.toString();
