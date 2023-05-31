@@ -26,7 +26,7 @@ export const RepositoriesContainer = styled(motion.div)`
   max-width: 620px;
   min-height: 100%;
   position: relative;
-  padding-bottom: 2rem;
+  padding-bottom: 3rem;
   #top {
     position: absolute;
     top: 0rem;
@@ -36,7 +36,7 @@ export const RepositoriesContainer = styled(motion.div)`
     position: absolute;
     bottom: 3.2rem;
   }
-  @media (max-width: 86rem) {
+  @media (max-width: 1376px) {
     padding-right: 2rem;
   }
 `;

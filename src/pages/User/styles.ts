@@ -134,27 +134,29 @@ export const CardUser = styled(CardContainer)`
   .followContainer {
     display: flex;
     gap: 1.4rem;
-    justify-content: flex-end;
+    -webkit-box-pack: end;
+    justify-content: flex-start;
     padding-top: 2rem;
-    .followers,
-    .following {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 0.8rem;
+    flex-wrap: wrap;
+  }
+  .followers,
+  .following {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.8rem;
 
-      p {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0.2rem 0.6rem;
-        background: #c5e0f9;
-        border-radius: 3.405px;
-        font-weight: 600;
-        font-size: 1.5891rem;
-        line-height: 1.9rem;
-        color: #0060b8;
-      }
+    p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.2rem 0.6rem;
+      background: #c5e0f9;
+      border-radius: 3.405px;
+      font-weight: 600;
+      font-size: 1.5891rem;
+      line-height: 1.9rem;
+      color: #0060b8;
     }
   }
 `;
@@ -164,6 +166,8 @@ export const ProfileUser = styled(CardContainer)`
   .heading {
     display: flex;
     align-items: center;
+    gap: 4px 20px;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-bottom: 1.6rem;
     .created {

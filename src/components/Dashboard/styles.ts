@@ -55,6 +55,7 @@ export const Navbar = styled.aside`
   }
   @media (max-width: 800px) {
     position: absolute;
+    z-index: 1;
     bottom: 0rem;
     border-radius: 0rem;
     flex-direction: row-reverse;
@@ -93,7 +94,7 @@ export const ContentContainer = styled.div`
   width: 100%;
   @media (max-width: 800px) {
     padding-inline: 2rem;
-    padding-bottom: 6.9rem;
+    padding-bottom: 60px;
   }
 `;
 

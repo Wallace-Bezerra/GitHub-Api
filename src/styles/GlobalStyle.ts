@@ -9,7 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     list-style: none;
     color: inherit;
   }
-  
+
   :root {
   font-family: Inter, sans-serif;
   font-synthesis: none;

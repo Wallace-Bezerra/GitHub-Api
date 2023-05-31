@@ -43,11 +43,11 @@ export const CardFavoritesContainer = styled(motion.div)`
   flex-direction: column;
   gap: 3rem;
   padding-bottom: 4rem;
-  @media (max-width: 600px) {
+  @media (max-width: 860px) {
     padding-right: 2rem;
   }
 `;
-export const ContainerNotFavorites = styled.div`
+export const ContainerNotFavorites = styled(motion.div)`
   display: flex;
   max-width: 630px;
   width: 100%;
@@ -57,21 +57,29 @@ export const ContainerNotFavorites = styled.div`
     flex-direction: column;
     h1 {
       margin-bottom: 30px;
+      .none{
+        color: #F78045;
+      }
+      .repo{
+        color: #8785DF;
+      }
     }
     a {
       display: flex;
       align-items: center;
       justify-content: center;
       align-self: flex-start;
-      padding: 8px 41px;
-      /* width: 209px;
-      height: 40px; */
+      padding: 10px 40px;
       background: #8785df;
       backdrop-filter: blur(6.5px);
       border-radius: 8px;
       font-weight: 500;
       font-size: 20px;
       line-height: 24px;
+      transition: opacity 0.5;
+      :hover{
+        opacity: 0.9;
+      }
     }
   }
   img {

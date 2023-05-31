@@ -1,0 +1,18 @@
+<svg width="256" height="194" viewBox="0 0 256 194" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Box">
+<rect id="Rectangle 64" width="88.3747" height="108.669" transform="matrix(0.94693 -0.321439 0 1 45.4639 56.8833)" fill="#6D919E"/>
+<rect id="Rectangle 62" width="88.7203" height="108.377" transform="matrix(0.94693 0.321439 0.00820296 0.999966 44.6273 56.7622)" fill="#ACBFC7"/>
+<rect id="Rectangle 65" width="88.7203" height="108.377" transform="matrix(0.94693 0.321439 0.00820296 0.999966 128.639 28.6565)" fill="#88A5B0"/>
+<path id="Rectangle 63" d="M128.59 85.4011L212.833 57.1598V165.38L129.322 193.739L128.59 85.4011Z" fill="#88A5B0"/>
+<rect id="Rectangle 66" width="87.5209" height="52.3473" transform="matrix(0.945482 0.325675 -0.874674 0.484711 45.7868 56.6936)" fill="#CDD9DD"/>
+<rect id="Rectangle 67" width="89.2645" height="48.7779" transform="matrix(0.942618 0.333874 -0.878851 0.477097 171.18 5.22485)" fill="#CDD9DD"/>
+<rect id="Rectangle 68" width="89.096" height="49.1497" transform="matrix(0.948752 -0.316021 0.82828 0.560314 128.176 85.2874)" fill="#CDD9DD"/>
+<rect id="Rectangle 69" width="88.0805" height="51.8342" transform="matrix(0.945511 -0.325589 0.833898 0.551919 2.78221 28.678)" fill="#CDD9DD"/>
+<g id="cara">
+<rect id="Rectangle 70" x="152.93" y="46.8633" width="23.1236" height="7.13985" rx="3.56993" transform="rotate(17.7598 152.93 46.8633)" fill="#101623"/>
+<circle id="Ellipse 97" cx="4.67785" cy="4.67785" r="4.67785" transform="matrix(0.969231 -0.246153 -0.00820296 0.999966 187.022 121.135)" fill="#456E7B"/>
+<circle id="Ellipse 98" cx="4.67785" cy="4.67785" r="4.67785" transform="matrix(0.969231 -0.246153 -0.00820296 0.999966 145.868 131.587)" fill="#456E7B"/>
+<path id="Vector 11" d="M184.659 150.983C184.721 135.352 163.592 140.652 163.531 156.144" stroke="#456E7B" stroke-width="2"/>
+</g>
+</g>
+</svg>

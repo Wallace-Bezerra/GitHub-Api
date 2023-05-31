@@ -8,7 +8,6 @@ import {
   ProfileUser,
 } from "./styles";
 import { UserContext } from "../../context/UserContext";
-import Atropos from 'atropos/react';
 
 export const User = () => {
   const { UserData } = useContext(UserContext);

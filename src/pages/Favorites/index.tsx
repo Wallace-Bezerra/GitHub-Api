@@ -26,9 +26,9 @@ export const Favorites = () => {
   return (
     <FavoritesContainer favorites={favorites.length}>
       {!favorites.length && (
-        <ContainerNotFavorites>
+        <ContainerNotFavorites initial={{opacity:0, x:-100}} animate={{opacity:1,x:0}}>
           <div className="notFavoritesMessage">
-            <h1>Você ainda não favoritou nenhum repositório</h1>
+            <h1>Você ainda não favoritou <span className="none">nenhum</span> <span className="repo">repositório</span></h1>
             <Link to={"/"}>Buscar agora</Link>
           </div>
           <img src={gitIlustration} />

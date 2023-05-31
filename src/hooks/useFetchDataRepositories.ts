@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from "react";
-import { RepositoriesI, UserContext } from "../context/UserContext";
+import { FavoritesI, RepositoriesI, UserContext } from "../context/UserContext";
 
 export const useFetchDataRepositories = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -68,13 +68,13 @@ export const useFetchDataRepositories = () => {
           // id me ajuda!
           const resultIsFavorite = JSON.parse(
             localStorage.getItem("Git-api")!
-          ).filter((item: any) => {
+          ).filter((item: FavoritesI) => {
             if (item.id === repo.id) {
               console.log("È iguallllll", repo.id, repo.name);
             }
             return item.id === repo.id;
           });
-          console.log(resultIsFavorite, "resut is Favorite");
+          console.log(resultIsFavorite, "result is Favorite");
           const commits = await FetchCommits.json();
           return {
             id: repo.id,
@@ -90,11 +90,11 @@ export const useFetchDataRepositories = () => {
         return getFetch();
       });
       const resposeRepositoriesFetch = await Promise.all(repositoriesFetch);
+      console.log(resposeRepositoriesFetch, "FETCH");
       setRepositories([...repositories, ...resposeRepositoriesFetch]);
       setIsLoading(false);
     } catch (error) {
-      // setError(true);
-      // navigate("/404");
+      console.log(error);
     }
   };
 

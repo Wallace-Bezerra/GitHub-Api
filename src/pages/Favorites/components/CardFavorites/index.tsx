@@ -39,10 +39,10 @@ export const CardFavorites = () => {
               </div>
               <Favorites isFavorite={favorite.isFavorite}
                 onClick={() => { 
-                  const filterRepositories = favorites.filter((item) => {
+                  const filterFavorites = favorites.filter((item) => {
                     return item.id !== favorite.id
                   })
-                  setFavorites(filterRepositories)
+                  setFavorites(filterFavorites)
                  }}>
                 <Star size={20} />
               </Favorites>

@@ -80,7 +80,7 @@ export const CardContainer = styled(motion.div)`
       gap: 0.8rem;
     }
   }
-  @media (max-width: 60rem) {
+  @media (max-width: 960px) {
     .heading {
       a {
         font-size: 2.2rem;

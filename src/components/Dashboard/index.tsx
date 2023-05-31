@@ -18,6 +18,8 @@ import { UserI, UserContext } from "../../context/UserContext";
 import { ModalUser } from "../ModalUser";
 import { AnimatePresence, motion } from "framer-motion";
 import { Loading } from "../Loading";
+import { NotFindUser } from "../NotFindUser";
+
 
 export const Dashboard = () => {
   useEffect(() => {
@@ -102,14 +104,7 @@ export const Dashboard = () => {
           </>
         )}
       </AnimatePresence>
-      {error && (
-        <div>
-          <NavLink to="/">
-            <House size={32} color="#ddd4d4" />
-          </NavLink>
-          <h2>Usuário não existe!</h2>
-        </div>
-      )}
+      {error && <NotFindUser />}
     </DashboardContainer>
   );
 };
