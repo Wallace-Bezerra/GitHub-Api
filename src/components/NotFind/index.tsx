@@ -1,4 +1,3 @@
-// import search from
 import { MagnifyingGlass, ArrowUp } from "phosphor-react";
 import { NotFindContainer } from "./styles";
 

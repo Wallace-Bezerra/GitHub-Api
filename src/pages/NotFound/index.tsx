@@ -1,5 +1,5 @@
 import { NotFoundContainer } from "./styles";
-import boxSvg from "../../assets/Box.svg";
+import boxSvg from "../../assets/box.svg";
 import { Link } from "react-router-dom";
 export const NotFound = () => {
   return (
