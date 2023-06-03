@@ -65,7 +65,7 @@ export const useFetchDataRepositories = () => {
               },
             }
           );
-          // id me ajuda!
+   
           const resultIsFavorite = JSON.parse(
             localStorage.getItem("Git-api")!
           ).filter((item: FavoritesI) => {
@@ -74,7 +74,7 @@ export const useFetchDataRepositories = () => {
             }
             return item.id === repo.id;
           });
-          console.log(resultIsFavorite, "result is Favorite");
+      
           const commits = await FetchCommits.json();
           return {
             id: repo.id,

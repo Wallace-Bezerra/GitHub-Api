@@ -189,26 +189,4 @@ export const ProfileUser = styled(CardContainer)`
   }
 `;
 
-export const LinguagueUser = styled(CardContainer)`
-  .languages {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-top: 2.2rem;
-    li {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      p {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 6.6rem;
-        height: 2.5rem;
-        text-align: center;
-        background: #a59f7e;
-        border-radius: 3.405px;
-      }
-    }
-  }
-`;
+

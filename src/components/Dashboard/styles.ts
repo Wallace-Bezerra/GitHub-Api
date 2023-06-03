@@ -91,6 +91,7 @@ export const Links = styled.div`
 export const ContentContainer = styled.div`
   padding-top: 10rem;
   padding-right: 4rem;
+  padding-bottom: 40px;
   width: 100%;
   @media (max-width: 800px) {
     padding-inline: 2rem;
