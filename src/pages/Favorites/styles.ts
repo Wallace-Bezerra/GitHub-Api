@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import styled, { css } from "styled-components";
+
 interface FavoritesContainerProps {
   favorites: number;
 }
 export const FavoritesContainer = styled.div<FavoritesContainerProps>`
   position: relative;
-  /* padding-top: 10rem; */
   padding-top: ${({ favorites }) => (favorites > 0 ? "7em" : "0")};
   ${({ favorites }) => {
     return !favorites
@@ -16,7 +16,7 @@ export const FavoritesContainer = styled.div<FavoritesContainerProps>`
       : null;
   }}
 
-  padding-inline: 4rem;
+  padding-inline: 20px;
   width: 100rem;
   height: 60rem;
   background: linear-gradient(
@@ -57,11 +57,11 @@ export const ContainerNotFavorites = styled(motion.div)`
     flex-direction: column;
     h1 {
       margin-bottom: 30px;
-      .none{
-        color: #F78045;
+      .none {
+        color: #f78045;
       }
-      .repo{
-        color: #8785DF;
+      .repo {
+        color: #8785df;
       }
     }
     a {
@@ -77,7 +77,7 @@ export const ContainerNotFavorites = styled(motion.div)`
       font-size: 20px;
       line-height: 24px;
       transition: opacity 0.5;
-      :hover{
+      :hover {
         opacity: 0.9;
       }
     }

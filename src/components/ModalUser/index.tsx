@@ -28,7 +28,7 @@ export const ModalUser = ({ setIsOpen, imageUser }: ModalUserProps) => {
       />
       <motion.img
         initial={{ y: 100 }}
-        animate={{ y: 0, transition: { type: "spring", damping: 8 } }}
+        animate={{ y: 0, transition: { duration: 0.4 } }}
         exit={{
           y: 100,
           opacity: 0,

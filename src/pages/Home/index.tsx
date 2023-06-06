@@ -37,7 +37,6 @@ export const Home = () => {
           staggerChildren: 2,
           type: "just",
         }}
-        // transition={{ duration: 0.8, bounce: 1 }}
         className="InputContainer"
       >
         <h1>
@@ -46,11 +45,8 @@ export const Home = () => {
         </h1>
         <motion.form
           variants={form}
-          // initial={"onInitial"}
-          // animate={"offAnimation"}
           onSubmit={() => {
             navigate("/user/");
-            // console.log(UserRef.current?.value);
             setUserData({ ...UserData, login: UserRef.current?.value });
           }}
         >

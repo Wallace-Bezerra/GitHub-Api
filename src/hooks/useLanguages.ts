@@ -2,16 +2,18 @@ import { useState, useContext, useEffect, useRef } from "react";
 import { UserContext } from "../context/UserContext";
 
 export const useLanguages = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const [languages, setLanguages] = useState<any>([]);
-  // const [page, setPage] = useState(1);
+  const [languages, setLanguages] = useState<languageArrayProps[]>([]);
+  const totalLanguage = useRef<number>(0);
   const lastPage = useRef<number>(1);
   const page = useRef<number>(1);
   const { UserData } = useContext(UserContext);
   let languagesTest: any[] = [];
 
+  interface languageArrayProps {
+    language: string;
+    value: number;
+  }
   useEffect(() => {
-    console.log("Renderizou");
     FetchDataRepositories();
   }, []);
 
@@ -38,8 +40,8 @@ export const useLanguages = () => {
               );
             }
           });
-        const dataResponse = await result.json();
-        const urlLanguagesData = dataResponse.map((repo: any) => {
+        const dataResponse: any[] = await result.json();
+        const urlLanguagesData = dataResponse.map((repo) => {
           const getFetch = async () => {
             const languages = await fetch(
               `https://api.github.com/repos/${UserData.login}/${repo.name}/languages`,
@@ -57,14 +59,12 @@ export const useLanguages = () => {
         });
 
         const responseLanguages = await Promise.all(urlLanguagesData);
-        const responseLanguagesFilter = responseLanguages.filter(
-          (item: any) => {
-            return Object.keys(item).length;
-          }
-        );
+        const responseLanguagesFilter = responseLanguages.filter((item) => {
+          return Object.keys(item).length;
+        });
         languagesTest.push(...responseLanguagesFilter);
       } catch (error) {
-        console.log(error);
+        throw error;
       }
       page.current++;
     } while (page.current <= lastPage.current);
@@ -72,7 +72,6 @@ export const useLanguages = () => {
     let languageObject: any = {};
     languagesTest.forEach((item) => {
       Object.entries(item).forEach((languageItem) => {
-        console.log(languageItem[0]);
         if (!languageObject[languageItem[0]]) {
           languageObject[languageItem[0]] = languageItem[1];
         } else {
@@ -80,7 +79,7 @@ export const useLanguages = () => {
         }
       });
     });
-    let languageArray = Object.entries(languageObject)
+    let languageArray: languageArrayProps[] = Object.entries(languageObject)
       .map((item) => {
         return {
           language: item[0],
@@ -93,12 +92,11 @@ export const useLanguages = () => {
       .filter((filter, index) => {
         return index < 5;
       });
-    const totalLanguage = languageArray.reduce((acc, curr) => {
+    totalLanguage.current = languageArray.reduce((acc, curr) => {
       return (acc += curr.value);
     }, 0);
-    setLanguages([languageArray, totalLanguage]);
+    setLanguages(languageArray);
   };
-  const GetStatics = () => {};
-
-  return languages;
+  const total = totalLanguage.current;
+  return { languages, total };
 };

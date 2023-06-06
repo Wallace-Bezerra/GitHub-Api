@@ -14,23 +14,23 @@ import {
 } from "./styles";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserI, UserContext } from "../../context/UserContext";
+import { UserContext } from "../../context/UserContext";
 import { ModalUser } from "../ModalUser";
 import { AnimatePresence, motion } from "framer-motion";
 import { Loading } from "../Loading";
 import { NotFindUser } from "../NotFindUser";
-
+import { UserI } from "../../context/Types";
 
 export const Dashboard = () => {
   useEffect(() => {
     FetchData();
   }, []);
-  console.log(import.meta.env.VITE_SOME_KEY);
+ 
   const { UserData, setUserData } = useContext(UserContext);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
+
 
   const FetchData = async () => {
     setIsLoading(true);
@@ -45,14 +45,12 @@ export const Dashboard = () => {
         }
       );
       const data: UserI = await result.json();
-      console.log(data);
       if (result.status === 404) {
         throw new Error("Não existe");
       }
       setUserData(data);
     } catch (error) {
       setError(true);
-      // navigate("/404");
     }
     setIsLoading(false);
   };

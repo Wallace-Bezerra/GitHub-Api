@@ -47,16 +47,20 @@ export const HomeContainer = styled.div`
       input {
         border: none;
         width: 28.58rem;
-        height: 3.627rem;
-        background: #5a6074;
-        border-radius: 0.3rem;
+        height: 38px;
+        background: rgb(90, 96, 116);
+        border-radius: 4px;
         font-weight: 400;
         font-size: 1.6rem;
         line-height: 1.9rem;
-        color: #ebebeb;
+        color: rgb(235, 235, 235);
         padding: 0.8rem 1.5rem;
         ::-webkit-calendar-picker-indicator {
           opacity: 0;
+        }
+        &:focus-visible {
+          outline: none;
+          border: 1px solid #e9e5e5;
         }
       }
       button {
@@ -65,7 +69,7 @@ export const HomeContainer = styled.div`
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        right: 0.6rem;
+        right: 12px;
         display: flex;
         transition: scale 0.4s;
         :hover {

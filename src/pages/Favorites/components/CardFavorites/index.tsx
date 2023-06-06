@@ -20,7 +20,6 @@ export const CardFavorites = () => {
 
   return (
     <>
-      {console.log(favorites)}
       {favorites?.map((favorite, index) => {
         return (
           <CardFavoritesContainer

@@ -1,131 +1,20 @@
 import { Star } from "phosphor-react/dist";
 import commitIcon from "../../../../assets/commit.svg";
 import { CardContainer, Favorites } from "./styles";
-import { memo, useContext, useEffect, useRef, useState } from "react";
-import { RepositoriesI, UserContext } from "../../../../context/UserContext";
+import { memo } from "react";
 import { Loading } from "../../../../components/Loading";
-import { useFetchDataRepositories } from "../../../../hooks/useFetchDataRepositories";
 import { NotFind } from "../../../../components/NotFind";
+import { useRepositories } from "../../../../hooks/useRepositories";
 
-interface languagesRepositoryProps {
-  language: string;
-  value: number;
-}
 const CardRepository = () => {
-  const [isFavorite, setIsFavorite] = useState(false);
-  const elementLast = useRef<HTMLDivElement | null>(null);
-  const [isNotFind, setIsNotFind] = useState(false);
-  const [isView, setIsView] = useState(false);
-  const { UserData, repositories, setRepositories, setFavorites, favorites } =
-    useContext(UserContext);
-  const { FetchDataRepositories, isLoading, lastPage, page, setPage, order } =
-  useFetchDataRepositories();
+  const {
+    handleFavorites,
+    languagePercentage,
+    repositories,
+    isLoading,
+    isNotFind,
+  } = useRepositories();
 
-  // ----------------------------------------------------
-
-  let observer: IntersectionObserver;
-  useEffect(() => {
-    if (page <= lastPage.current) {
-      FetchDataRepositories();
-    }
-    if (page !== 1 && page === lastPage.current) {
-      console.log(page, lastPage.current);
-      console.log("Não há mais repositórios");
-      setTimeout(() => {
-        setIsNotFind(() => true);
-      }, 1000);
-    }
-    setIsNotFind(false);
-    return () => {
-      if (page >= 1 && window.location.pathname === "/user/repositories") {
-        return;
-      }
-      setRepositories([]);
-      setPage(1);
-      setIsNotFind(false);
-    };
-  }, [UserData, page, order]);
-  console.log(order);
-  console.log("Repositorios", repositories);
-
-  useEffect(() => {
-    let options = {
-      rootMargin: "-20px",
-      threshold: 1.0,
-    };
-
-    observer = new IntersectionObserver((entries) => {
-      console.log(entries[0].intersectionRatio, "AHHHHHHHHH");
-      setIsView(Boolean(entries[0].intersectionRatio));
-    }, options);
-    elementLast.current = document.querySelector<HTMLDivElement>(".last");
-    observer.observe(elementLast.current!);
-    return () => {
-      console.log("desmonteiii");
-      observer.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isView) {
-      if (page < lastPage.current && !isLoading) {
-        setPage((prev) => prev + 1);
-      }
-    }
-  }, [isView]);
-  const handleFavorites = (repo: RepositoriesI, index:number) => {
-    let duplicateFavorites = favorites.filter((item) => {
-      return item.id === repo.id;
-    });
-    if (duplicateFavorites.length > 0) {
-      console.log("Já existe");
-      const filtredRepositories = repositories.map((repoItem) => {
-        if (repoItem.id === repo.id) {
-          return {
-            ...repoItem,
-            isFavorite: !repoItem.isFavorite,
-          };
-        }
-        return repoItem;
-      });
-      const FilterFavorites = favorites.filter((item) => {
-        return item.id !== repo.id;
-      });
-      setFavorites(FilterFavorites);
-      setRepositories(() => filtredRepositories);
-      return;
-    }
-    setIsFavorite((prev) => !prev);
-    const filtredRepositories = repositories.map((repoItem) => {
-      if (repoItem.id === repo.id) {
-        console.log(repoItem.id, repo.id);
-        return {
-          ...repoItem,
-          isFavorite: !repoItem.isFavorite,
-        };
-      }
-      return repoItem;
-    });
-
-    setFavorites((prev) => {
-      const favorites = [
-        ...prev,
-        {
-          id: repo.id,
-          name: repo.name,
-          language: repo.language,
-          html_url: repo.html_url,
-          pushed_at: repo.pushed_at,
-          pushed_now: new Date().toISOString(),
-          isFavorite: filtredRepositories[index]!.isFavorite,
-          login: UserData.login,
-          avatar_url: UserData.avatar_url,
-        },
-      ];
-      return favorites;
-    });
-    setRepositories(() => filtredRepositories);
- }
   const cardItem = {
     onInitial: { x: -100, opacity: 0 },
     offAnimation: (i = 3) => ({
@@ -136,49 +25,20 @@ const CardRepository = () => {
       },
     }),
   };
-  let INDICE: number = 0;
-  // ----------------------------------------------------------------------
+  let indice: number = 0;
+
   return (
     <>
       <div id="top"></div>
       {repositories?.map((repo, index) => {
-        if (INDICE >= 10) {
-          INDICE = 1;
+        if (indice >= 10) {
+          indice = 1;
         } else {
-          INDICE = ++INDICE;
+          indice = ++indice;
         }
-        let languagesRepository: languagesRepositoryProps[];
-        let languagesRepositoryRender: React.ReactNode;
-        if (repo.languages) {
-          languagesRepository = Object.keys(repo.languages).map(
-            (item, index) => {
-              return {
-                language: item,
-                value: Object.values(repo.languages)[index],
-              };
-            }
-          );
-          languagesRepositoryRender = languagesRepository.map(
-            (repoLanguage) => {
-              const valuePercentage =
-                (repoLanguage.value * 100) /
-                Object.values(repo.languages).reduce(
-                  (acc: number, curr: number) => {
-                    return acc + curr;
-                  },
-                  0
-                );
-              return (
-                <li key={`${repo.id}${repoLanguage.language}`}>
-                  <p>{repoLanguage.language}</p>
-                  <span>{valuePercentage.toFixed(1)}%</span>
-                </li>
-              );
-            }
-          );
-        }
+        const languagesRepositoryRender = languagePercentage(repo);
         return (
-          <CardContainer variants={cardItem} custom={INDICE} key={repo.id}>
+          <CardContainer variants={cardItem} custom={indice} key={repo.id}>
             <div className="heading">
               <div className="nameRepository">
                 <a target="_blank" href={repo.html_url}>
@@ -187,7 +47,9 @@ const CardRepository = () => {
                 <span>{repo.language}</span>
               </div>
               <Favorites
-                onClick={() => { handleFavorites(repo, index) }}
+                onClick={() => {
+                  handleFavorites(repo, index);
+                }}
                 isFavorite={repo.isFavorite}
               >
                 <Star size={20} />
@@ -195,7 +57,16 @@ const CardRepository = () => {
             </div>
             <div className="footer">
               <span>{new Date(repo.pushed_at).toLocaleDateString()}</span>
-              <ul>{languagesRepositoryRender}</ul>
+              <ul>
+                {languagesRepositoryRender?.map((language) => {
+                  return (
+                    <li key={`${repo.id}${language.language}`}>
+                      <p>{language.language}</p>
+                      <span>{language.value.toFixed(1)}%</span>
+                    </li>
+                  );
+                })}
+              </ul>
               <div className="commits">
                 <p>
                   {repo.commits === 30 ? "+30" : repo.commits}

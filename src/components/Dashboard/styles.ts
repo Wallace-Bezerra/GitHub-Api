@@ -76,11 +76,13 @@ export const Links = styled.div`
     width: 4.54rem;
     height: 4.54rem;
     justify-content: center;
-
+    transition: background 0.5s ease;
+    border-radius: 50%;
     &.active {
       background: rgba(132, 130, 231, 0.66);
-      border-radius: 50%;
-      transition: background 0.5s ease;
+    }
+    &:not(.active):hover {
+      background-color: rgba(125, 126, 129, 0.69);
     }
   }
   @media (max-width: 800px) {
@@ -105,4 +107,7 @@ export const MenuBar = styled.div`
   position: absolute;
   top: 3.5rem;
   right: 4rem;
+  @media (max-width: 800px) {
+    right: 2rem;
+  }
 `;

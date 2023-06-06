@@ -1,16 +1,10 @@
-import { useEffect } from "react";
 import { useLanguages } from "../../hooks/useLanguages";
 import { LanguagePercentage, LinguagueUser } from "./styles";
 import { Loading } from "../Loading";
-import { text } from "stream/consumers";
 
 export const Languages = () => {
-  const [languages, total] = useLanguages();
-  console.log(languages);
-  console.log(total);
-  // console.log("Render");
-  useEffect(() => {}, []);
-  const cardItem = {
+  const { languages, total } = useLanguages();
+  const cardItem: any = {
     onInitial: { x: -100, opacity: 0 },
     offAnimation: (i = 3) => ({
       x: 0,
@@ -20,24 +14,26 @@ export const Languages = () => {
       },
     }),
   };
+
   return (
     <LinguagueUser>
       <h2>Top Linguagens</h2>
       <ul className="languages">
-        {!languages && (
+        {languages.length === 0 && (
           <>
             <Loading width={60} />
             <p style={{ textAlign: "center" }}>Varrendo repositórios...</p>
           </>
         )}
 
-        {languages?.map(({ language, value }: any, key: any) => {
+        {languages?.map(({ language, value }: any, index: number) => {
           const percentage = ((value * 100) / total).toFixed(2);
           return (
             <LanguagePercentage
               percentage={percentage}
               variants={cardItem}
-              custom={key}
+              custom={index}
+              key={index}
             >
               <div className="percentageCard">
                 <p>{language}</p>

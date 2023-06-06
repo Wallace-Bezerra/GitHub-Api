@@ -6,13 +6,11 @@ import { Languages } from "../../components/Languages";
 
 export const User = () => {
   const { UserData } = useContext(UserContext);
-  console.log(UserData);
   const container = {
-    onInitial: { x: -100, opacity: 0 },
+    onInitial: { opacity: 0 },
     offAnimation: {
-      x: 0,
       opacity: 1,
-      duration: 1.2,
+      duration: 0.4,
     },
   };
   return (

@@ -1,5 +1,7 @@
 import { useContext, useRef, useState } from "react";
-import { FavoritesI, RepositoriesI, UserContext } from "../context/UserContext";
+import { UserContext } from "../context/UserContext";
+import { RepositoriesI, FavoritesI } from "../context/Types";
+
 
 export const useFetchDataRepositories = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -16,7 +18,6 @@ export const useFetchDataRepositories = () => {
 
   const FetchDataRepositories = async () => {
     try {
-      console.log("TESTEEEEEE");
       setIsLoading(true);
       const result = await fetch(
         `https://api.github.com/users/${UserData.login}/repos?&per_page=10&page=${page}&sort=pushed&direction=${order}`,
@@ -39,12 +40,10 @@ export const useFetchDataRepositories = () => {
             lastPage.current = Number(
               new URL(urlPage).searchParams.get("page")
             );
-            console.log(lastPage.current);
           }
         });
 
       const data: RepositoriesI[] = await result.json();
-      console.log("repos", data);
       const repositoriesFetch: Promise<RepositoriesI>[] = data.map((repo) => {
         const getFetch = async () => {
           const FetchCommits = await fetch(
@@ -65,16 +64,13 @@ export const useFetchDataRepositories = () => {
               },
             }
           );
-   
+
           const resultIsFavorite = JSON.parse(
             localStorage.getItem("Git-api")!
           ).filter((item: FavoritesI) => {
-            if (item.id === repo.id) {
-              console.log("È iguallllll", repo.id, repo.name);
-            }
             return item.id === repo.id;
           });
-      
+
           const commits = await FetchCommits.json();
           return {
             id: repo.id,
@@ -90,11 +86,10 @@ export const useFetchDataRepositories = () => {
         return getFetch();
       });
       const resposeRepositoriesFetch = await Promise.all(repositoriesFetch);
-      console.log(resposeRepositoriesFetch, "FETCH");
       setRepositories([...repositories, ...resposeRepositoriesFetch]);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      throw error;
     }
   };
 
