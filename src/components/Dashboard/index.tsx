@@ -1,7 +1,7 @@
 import {
   BookBookmark,
   FolderSimpleStar,
-  House,
+  MagnifyingGlass,
   User,
 } from "phosphor-react/dist";
 import {
@@ -91,7 +91,7 @@ export const Dashboard = () => {
                   <FolderSimpleStar size={32} color="#ddd4d4" />
                 </NavLink>
                 <NavLink to="/">
-                  <House size={32} color="#ddd4d4" />
+                  <MagnifyingGlass size={30} color="#ddd4d4" />
                 </NavLink>
               </MenuBar>
 

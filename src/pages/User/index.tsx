@@ -57,9 +57,9 @@ export const User = () => {
 
       <ProfileUser>
         <div className="heading">
-          <h2>Profile</h2>
+          <h2>Perfil</h2>
           <div className="created">
-            <p>Desde</p>
+            <p>Membro desde</p>
             <span>
               {new Date(UserData.created_at).toLocaleDateString("pt-br", {
                 month: "long",
@@ -70,9 +70,11 @@ export const User = () => {
         </div>
         <div className="infoUser">
           <p className="bio">{UserData.bio}</p>
-          <div>
+          <div className="others">
             <p>{UserData.company}</p>
-            <p>{UserData.blog}</p>
+            <a href={UserData.blog} target="_blank">
+              {UserData.blog}
+            </a>
           </div>
         </div>
       </ProfileUser>

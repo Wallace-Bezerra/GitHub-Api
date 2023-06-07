@@ -18,6 +18,11 @@ export const ModalUser = ({ setIsOpen, imageUser }: ModalUserProps) => {
       initial={"close"}
       animate={"open"}
       exit={"close"}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) {
+          setIsOpen((prev) => !prev);
+        }
+      }}
       transition={{ duration: 0.5 }}
     >
       <XCircle

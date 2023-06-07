@@ -173,6 +173,7 @@ export const ProfileUser = styled(CardContainer)`
     .created {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       gap: 0.8rem;
       p {
         color: #c5e0f9;
@@ -186,7 +187,14 @@ export const ProfileUser = styled(CardContainer)`
     .bio {
       line-height: 2.4rem;
     }
+    .others {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      a {
+        color: #c5e0f9;
+        align-self: flex-start;
+      }
+    }
   }
 `;
-
-

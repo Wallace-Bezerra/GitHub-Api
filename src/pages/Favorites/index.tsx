@@ -1,4 +1,4 @@
-import { House } from "phosphor-react";
+import { MagnifyingGlass } from "phosphor-react";
 import gitIlustration from "../../assets/git-ilustration.png";
 import { MenuBar } from "../../components/Dashboard/styles";
 import { Filter } from "../../components/Filter";
@@ -16,7 +16,6 @@ import { UserContext } from "../../context/UserContext";
 export const Favorites = () => {
   const { favorites, UserData } = useContext(UserContext);
   const navigate = useNavigate();
-  console.log(UserData);
   const container = {
     onInitial: { x: -100, opacity: 0 },
     offAnimation: {
@@ -58,7 +57,7 @@ export const Favorites = () => {
           <Filter />
           <MenuBar>
             <NavLink to="/">
-              <House size={32} color="#ddd4d4" />
+              <MagnifyingGlass size={30} color="#ddd4d4" />
             </NavLink>
           </MenuBar>
 

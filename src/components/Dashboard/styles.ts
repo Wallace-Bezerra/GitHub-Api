@@ -103,6 +103,7 @@ export const ContentContainer = styled.div`
 
 export const MenuBar = styled.div`
   display: flex;
+  align-items: center;
   gap: 1.4rem;
   position: absolute;
   top: 3.5rem;
