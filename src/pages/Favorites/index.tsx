@@ -8,13 +8,15 @@ import {
   ContainerNotFavorites,
   FavoritesContainer,
 } from "./styles";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Wrapper } from "../Repositories/styles";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 
 export const Favorites = () => {
-  const { favorites } = useContext(UserContext);
+  const { favorites, UserData } = useContext(UserContext);
+  const navigate = useNavigate();
+  console.log(UserData);
   const container = {
     onInitial: { x: -100, opacity: 0 },
     offAnimation: {
@@ -35,7 +37,18 @@ export const Favorites = () => {
               Você ainda não favoritou <span className="none">nenhum</span>{" "}
               <span className="repo">repositório</span>
             </h1>
-            <Link to={"/"}>Buscar agora</Link>
+            {UserData.login && (
+              <Link
+                to={".."}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate(-1);
+                }}
+              >
+                Voltar
+              </Link>
+            )}
+            {!UserData.login && <Link to={"/"}>Buscar agora</Link>}
           </div>
           <img src={gitIlustration} />
         </ContainerNotFavorites>
