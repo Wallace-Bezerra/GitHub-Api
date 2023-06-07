@@ -1,4 +1,3 @@
-import { NavLink, Outlet } from "react-router-dom";
 import {
   BookBookmark,
   FolderSimpleStar,
@@ -12,11 +11,11 @@ import {
   MenuBar,
   Navbar,
 } from "./styles";
+import { NavLink, Outlet } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
 import { ModalUser } from "../ModalUser";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { Loading } from "../Loading";
 import { NotFindUser } from "../NotFindUser";
 import { UserI } from "../../context/Types";
@@ -25,12 +24,11 @@ export const Dashboard = () => {
   useEffect(() => {
     FetchData();
   }, []);
- 
+
   const { UserData, setUserData } = useContext(UserContext);
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
 
   const FetchData = async () => {
     setIsLoading(true);
@@ -97,7 +95,7 @@ export const Dashboard = () => {
                 </NavLink>
               </MenuBar>
 
-              <Outlet></Outlet>
+              <Outlet />
             </ContentContainer>
           </>
         )}
